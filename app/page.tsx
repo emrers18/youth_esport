@@ -37,12 +37,12 @@ export default async function HomePage() {
         <div className="absolute inset-0 -z-10">
           <YoutubeHeroBackground
             videoId={HERO_VIDEO_ID}
-            className="absolute inset-0 h-full w-full overflow-hidden opacity-30"
+            className="absolute inset-0 h-full w-full overflow-hidden"
           />
           <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="absolute inset-x-0 h-24 bg-linear-to-b from-primary/25 to-transparent blur-sm animate-scanline" />
           </div>
-          <div className="absolute inset-0 bg-linear-to-b from-background/40 via-background/80 to-background" />
+          <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/55 to-background" />
         </div>
 
         <GridBackground />

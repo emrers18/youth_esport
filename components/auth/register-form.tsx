@@ -30,7 +30,7 @@ import {
   MAIN_GAME_OPTIONS,
   MEMBER_ROLE_OPTIONS,
 } from "@/lib/validation/team";
-import { createTeamApplication } from "@/lib/actions/team-actions";
+import { registerTeamWithAccount } from "@/lib/actions/auth-actions";
 
 const registerFormSchema = z
   .object({
@@ -66,49 +66,28 @@ export function RegisterForm() {
   });
 
   const onSubmit = async (values: RegisterFormInput) => {
-    const supabase = createClient();
-    const { email, password, ...teamValues } = values;
+    const result = await registerTeamWithAccount(values);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { role: "TEAM" },
-      },
-    });
-
-    if (error) {
-      const message = error.message.includes("already registered")
-        ? "Bu e-posta adresi zaten kayıtlı."
-        : error.message;
-      form.setError("email", { message });
+    if (!result.success) {
+      const message = result.error ?? "Kayıt başarısız oldu.";
+      if (message.includes("e-posta")) {
+        form.setError("email", { message });
+      }
       toast.error(message);
       return;
     }
 
-    // Auto sign-in after registration
+    // Account + team application are already created server-side.
+    // Sign in client-side purely to establish the session cookie.
+    const supabase = createClient();
     const { error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: values.email,
+      password: values.password,
     });
 
     if (signInError) {
-      toast.error(
-        "Hesap oluşturuldu ancak otomatik giriş başarısız oldu. Lütfen giriş yapıp takım başvurunuzu tamamlayın."
-      );
+      toast.success("Hesabınız ve takım başvurunuz oluşturuldu. Lütfen giriş yapın.");
       router.push("/giris");
-      return;
-    }
-
-    const result = await createTeamApplication(teamValues);
-
-    if (!result.success) {
-      toast.error(
-        result.error ??
-          "Hesap oluşturuldu ancak takım başvurusu gönderilemedi. Panelinizden tekrar deneyebilirsiniz."
-      );
-      router.push("/panel");
-      router.refresh();
       return;
     }
 
