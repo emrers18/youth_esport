@@ -77,7 +77,10 @@ export function RegisterForm() {
       return;
     }
 
-    // Account + team application are already created server-side.
+    // Account + team application are already created server-side —
+    // clear the form now so stale/sensitive input doesn't linger.
+    form.reset();
+
     // Sign in client-side purely to establish the session cookie.
     const supabase = createClient();
     const { error: signInError } = await supabase.auth.signInWithPassword({
