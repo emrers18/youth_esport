@@ -1,0 +1,224 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@config "../tailwind.config.ts";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-rajdhani);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* YouthArenaEsports is a single fixed dark theme — no light-mode toggle. */
+:root {
+  --background: #0b0e14;
+  --foreground: #f2f3f7;
+  --card: #1a1f2b;
+  --card-foreground: #f2f3f7;
+  --popover: #1a1f2b;
+  --popover-foreground: #f2f3f7;
+  --primary: #7b5cff;
+  --primary-foreground: #f2f3f7;
+  --secondary: #39ffb0;
+  --secondary-foreground: #0b0e14;
+  --muted: #1a1f2b;
+  --muted-foreground: #9aa0b0;
+  --accent: #4e7cff;
+  --accent-foreground: #f2f3f7;
+  --destructive: #ff4d4d;
+  --border: #2a3040;
+  --input: #232838;
+  --ring: #7b5cff;
+  --radius: 0.5rem;
+  --sidebar: #1a1f2b;
+  --sidebar-foreground: #f2f3f7;
+  --sidebar-primary: #7b5cff;
+  --sidebar-primary-foreground: #f2f3f7;
+  --sidebar-accent: #232838;
+  --sidebar-accent-foreground: #f2f3f7;
+  --sidebar-border: #2a3040;
+  --sidebar-ring: #7b5cff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-textPrimary font-body antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-heading font-semibold tracking-wide;
+  }
+  ::selection {
+    @apply bg-primary/40 text-textPrimary;
+  }
+}
+
+@layer utilities {
+  .container-app {
+    @apply mx-auto w-full max-w-8xl px-4 sm:px-6 lg:px-8;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Gamification / interactive decoration layer                            */
+/* ---------------------------------------------------------------------- */
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 color-mix(in oklch, var(--color-secondary) 0%, transparent));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px color-mix(in oklch, var(--color-secondary) 70%, transparent));
+  }
+}
+
+@keyframes float-orb {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12px, -18px);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes grid-pan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 64px 64px;
+  }
+}
+
+@keyframes marquee-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+.animate-float-orb {
+  animation: float-orb 7s ease-in-out infinite;
+}
+.animate-scanline {
+  animation: scanline 4s linear infinite;
+}
+.animate-grid-pan {
+  animation: grid-pan 6s linear infinite;
+}
+.animate-marquee {
+  animation: marquee-x 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-glow,
+  .animate-float-orb,
+  .animate-scanline,
+  .animate-grid-pan,
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+/* HUD-style corner brackets — appear on hover for cards/frames */
+.hud-corners {
+  position: relative;
+}
+.hud-corners::before,
+.hud-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--color-primary);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  z-index: 10;
+}
+.hud-corners::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.hud-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+.hud-corners:hover::before,
+.hud-corners:hover::after,
+.hud-corners:focus-within::before,
+.hud-corners:focus-within::after {
+  opacity: 1;
+}
+
+.text-glow-primary {
+  text-shadow: 0 0 18px color-mix(in oklch, var(--color-primary) 55%, transparent);
+}
+.text-glow-secondary {
+  text-shadow: 0 0 18px color-mix(in oklch, var(--color-secondary) 55%, transparent);
+}
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--color-primary) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--color-primary) 14%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
