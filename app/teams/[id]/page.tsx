@@ -48,7 +48,7 @@ export default async function TeamDetailPage({
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="font-heading text-3xl font-bold tracking-wide text-textPrimary sm:text-4xl">
-                  <span className="text-primary">[{team.tag}]</span> {team.name}
+                  <span className="text-gold-dark">[{team.tag}]</span> {team.name}
                 </h1>
                 {team.status !== "APPROVED" && <StatusBadge status={team.status} />}
               </div>

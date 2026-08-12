@@ -114,7 +114,7 @@ export default async function HomePage() {
         <FadeIn className="container-app py-16">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div className="flex items-center gap-3">
-              <PixelTrophy className="text-primary" />
+              <PixelTrophy className="text-glow-gold text-gold" />
               <div>
                 <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
                   Featured Teams

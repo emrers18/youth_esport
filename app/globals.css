@@ -215,6 +215,15 @@
 .text-glow-secondary {
   text-shadow: 0 0 18px color-mix(in oklch, var(--color-secondary) 55%, transparent);
 }
+.text-glow-gold {
+  text-shadow: 0 0 18px color-mix(in oklch, var(--color-gold) 60%, transparent);
+}
+
+/* Gold corner brackets — for featured/premium cards, in place of the default primary hud-corners */
+.hud-corners-gold::before,
+.hud-corners-gold::after {
+  border-color: var(--color-gold);
+}
 
 .bg-grid-pattern {
   background-image:

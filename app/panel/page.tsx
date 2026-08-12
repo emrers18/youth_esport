@@ -133,7 +133,7 @@ export default async function TeamPanelPage() {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h2 className="font-heading text-xl font-bold text-textPrimary">
-                <span className="text-primary">[{team.tag}]</span> {team.name}
+                <span className="text-gold-dark">[{team.tag}]</span> {team.name}
               </h2>
               <StatusBadge status={team.status} />
             </div>
@@ -234,7 +234,7 @@ export default async function TeamPanelPage() {
                                     href={`/teams/${participant.id}`}
                                     className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-textPrimary transition-colors hover:border-primary/40 hover:text-primary"
                                   >
-                                    <span className="font-heading font-bold text-primary">
+                                    <span className="font-heading font-bold text-gold-dark">
                                       [{participant.tag}]
                                     </span>
                                     {participant.name}

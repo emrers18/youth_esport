@@ -22,6 +22,11 @@ const config: Config = {
         },
         primaryAlt: "#DB2777",
         secondary: "#047857",
+        gold: {
+          DEFAULT: "#D4AF37",
+          light: "#F0D479",
+          dark: "#9C7A1F",
+        },
         danger: "#DC2626",
         warning: "#B45309",
         textPrimary: "#0F172A",
@@ -47,6 +52,7 @@ const config: Config = {
       boxShadow: {
         glow: "0 0 24px 0 rgba(37, 99, 235, 0.35)",
         "glow-secondary": "0 0 24px 0 rgba(4, 120, 87, 0.28)",
+        "glow-gold": "0 0 24px 0 rgba(212, 175, 55, 0.4)",
       },
       screens: {
         xs: "375px",
