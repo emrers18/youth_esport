@@ -4,6 +4,7 @@ import { CalendarIcon, MapPinIcon } from "lucide-react";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import { EventParticipationButton } from "@/components/event-participation-button";
 import { CapacityBar } from "@/components/capacity-bar";
+import { FadeIn } from "@/components/effects/fade-in";
 import { getEventById } from "@/lib/data";
 import { formatEventDate } from "@/lib/format";
 import { getAuthUser, createClient } from "@/lib/supabase-server";
@@ -55,7 +56,7 @@ export default async function EventDetailPage({
 
   return (
     <div className="container-app py-12">
-      <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+      <FadeIn className="grid gap-8 lg:grid-cols-[1fr_320px]">
         <div className="flex flex-col gap-6">
           <MediaPlaceholder imageUrl={event.image_url} alt={event.title} aspect="video" />
 
@@ -104,7 +105,7 @@ export default async function EventDetailPage({
             isLoggedIn={!!user}
           />
         </aside>
-      </div>
+      </FadeIn>
     </div>
   );
 }

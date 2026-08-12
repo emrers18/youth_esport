@@ -4,6 +4,7 @@ import { EventCard } from "@/components/event-card";
 import { EventFilterTabs } from "@/components/event-filter-tabs";
 import { EmptyState } from "@/components/empty-state";
 import { PixelJoystick } from "@/components/effects/pixel-icons";
+import { FadeIn } from "@/components/effects/fade-in";
 import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
 import { getAuthUser, createClient } from "@/lib/supabase-server";
@@ -77,8 +78,10 @@ export default async function EventsPage({
           />
         ) : (
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {events.map((event) => (
-              <EventCard key={event.id} event={event} />
+            {events.map((event, i) => (
+              <FadeIn key={event.id} delay={i * 60}>
+                <EventCard event={event} />
+              </FadeIn>
             ))}
           </div>
         )}

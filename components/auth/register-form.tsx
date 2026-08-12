@@ -25,6 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { createClient } from "@/lib/supabase";
+import { ImageUpload } from "@/components/image-upload";
 import {
   teamApplicationSchema,
   MAIN_GAME_OPTIONS,
@@ -240,6 +241,26 @@ export function RegisterForm() {
                 <FormLabel>Kaptan E-postası</FormLabel>
                 <FormControl>
                   <Input type="email" placeholder="kaptan@ornek.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="logoUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Takım Logosu</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    folder="team-logos"
+                    aspect="square"
+                    label="Takım logosu"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

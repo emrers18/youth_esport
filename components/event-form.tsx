@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { ImageUpload } from "@/components/image-upload";
 import { eventSchema, type EventInput } from "@/lib/validation/event";
 import { createEvent } from "@/lib/actions/event-actions";
 
@@ -118,16 +118,25 @@ export function EventForm() {
           )}
         />
 
-        <div>
-          <p className="text-sm font-medium text-textPrimary">Etkinlik Görseli</p>
-          <div className="mt-2 flex aspect-video w-full max-w-sm flex-col items-center justify-center gap-2 rounded-md border border-dashed border-border bg-surface text-textSecondary">
-            <ImageIcon className="size-6 opacity-60" aria-hidden="true" />
-            <span className="text-xs font-medium">Görsel Yakında</span>
-          </div>
-          <p className="mt-1 text-xs text-textSecondary">
-            Dosya yükleme entegrasyonu sonraki fazda eklenecek.
-          </p>
-        </div>
+        <FormField
+          control={form.control}
+          name="imageUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Etkinlik Görseli</FormLabel>
+              <FormControl>
+                <ImageUpload
+                  value={field.value}
+                  onChange={field.onChange}
+                  folder="event-images"
+                  aspect="video"
+                  label="Etkinlik görseli"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting} className="self-start">
           {form.formState.isSubmitting ? "Oluşturuluyor..." : "Etkinliği Oluştur"}

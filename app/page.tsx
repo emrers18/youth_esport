@@ -5,6 +5,7 @@ import { MediaPlaceholder } from "@/components/media-placeholder";
 import { StatCounter } from "@/components/stat-counter";
 import { TeamCard } from "@/components/team-card";
 import { GridBackground } from "@/components/effects/grid-background";
+import { FadeIn } from "@/components/effects/fade-in";
 import { YoutubeHeroBackground } from "@/components/effects/youtube-hero-background";
 import { PixelTrophy, PixelJoystick } from "@/components/effects/pixel-icons";
 import { getFeaturedTeams, getHomeStats } from "@/lib/data";
@@ -14,12 +15,12 @@ export const dynamic = "force-dynamic";
 const HERO_VIDEO_ID = "F7HFWuo_utY";
 
 const galleryItems = [
-  { kind: "image" as const, label: "Turnuva Anları" },
-  { kind: "video" as const, label: "Açılış Töreni" },
-  { kind: "image" as const, label: "Topluluk Buluşması" },
-  { kind: "image" as const, label: "Atölye Çalışması" },
-  { kind: "video" as const, label: "Takım Röportajı" },
-  { kind: "image" as const, label: "Ödül Töreni" },
+  { kind: "image" as const, label: "Turnuva Anları", imageUrl: "/gallery/medya-1.jpg" },
+  { kind: "image" as const, label: "Açılış Töreni", imageUrl: "/gallery/medya-2.jpg" },
+  { kind: "image" as const, label: "Topluluk Buluşması", imageUrl: "/gallery/medya-3.jpg" },
+  { kind: "image" as const, label: "Atölye Çalışması", imageUrl: "/gallery/medya-4.jpg" },
+  { kind: "image" as const, label: "Takım Röportajı", imageUrl: "/gallery/medya-5.jpg" },
+  { kind: "image" as const, label: "Ödül Töreni", imageUrl: "/gallery/medya-6.jpg" },
 ];
 
 const partnerPlaceholders = Array.from({ length: 6 });
@@ -42,19 +43,22 @@ export default async function HomePage() {
           <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="absolute inset-x-0 h-24 bg-linear-to-b from-primary/25 to-transparent blur-sm animate-scanline" />
           </div>
-          <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/55 to-background" />
+          {/* Horizontal fade anchors a readable text panel on the left while keeping the video clear on the right */}
+          <div className="absolute inset-0 bg-linear-to-r from-background via-background/75 to-background/10 sm:via-background/60 sm:to-transparent" />
+          {/* Bottom fade for a seamless transition into the next section */}
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-background" />
         </div>
 
         <GridBackground />
 
-        <div className="container-app relative flex flex-col items-center gap-6 py-24 text-center sm:py-32">
+        <div className="container-app relative flex min-h-130 flex-col items-start justify-end gap-6 py-14 text-left sm:min-h-155 sm:py-20">
           <span className="animate-pulse-glow rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-xs font-semibold tracking-wide text-primary">
             Bridges: Anti Discriminatory Language and Esports
           </span>
-          <h1 className="text-glow-primary font-heading text-5xl font-bold tracking-wide text-textPrimary sm:text-6xl lg:text-7xl">
+          <h1 className="text-glow-primary font-heading text-4xl font-bold tracking-wide text-textPrimary sm:text-6xl lg:text-7xl">
             YouthArena<span className="text-primary">Esports</span>
           </h1>
-          <p className="max-w-2xl text-balance text-lg text-textSecondary">
+          <p className="max-w-xl text-balance text-lg text-textSecondary">
             Erasmus+ destekli bir gençlik projesi olarak, espor topluluklarında
             saygılı ve kapsayıcı bir dil kültürü inşa etmek için Avrupa
             genelindeki genç takımları bir araya getiriyoruz.
@@ -73,7 +77,7 @@ export default async function HomePage() {
 
       {/* 2. Proje Hakkında */}
       <section className="border-b border-border">
-        <div className="container-app grid gap-10 py-16 lg:grid-cols-2 lg:items-center">
+        <FadeIn className="container-app grid gap-10 py-16 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col gap-4">
             <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
               Proje Hakkında
@@ -94,14 +98,20 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="hud-corners">
-            <MediaPlaceholder aspect="video" label="Proje Tanıtım Görseli" />
+            <MediaPlaceholder
+              aspect="video"
+              kind="image"
+              imageUrl="/gallery/esport.jpg"
+              alt="Proje Tanıtım Görseli"
+              label="Proje Tanıtım Görseli"
+            />
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       {/* 3. Öne Çıkan Takımlar */}
       <section className="border-b border-border">
-        <div className="container-app py-16">
+        <FadeIn className="container-app py-16">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div className="flex items-center gap-3">
               <PixelTrophy className="text-primary" />
@@ -140,27 +150,29 @@ export default async function HomePage() {
               Henüz onaylı takım bulunmuyor. İlk takımı sen oluştur!
             </p>
           )}
-        </div>
+        </FadeIn>
       </section>
 
       {/* 4. Medya Galerisi */}
       <section className="border-b border-border">
         <div className="container-app py-16">
-          <div className="flex items-center gap-3">
+          <FadeIn className="flex items-center gap-3">
             <PixelJoystick className="text-secondary" />
             <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
               Medya Galerisi
             </h2>
-          </div>
+          </FadeIn>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {galleryItems.map((item, i) => (
-              <div key={i} className="hud-corners group">
+              <FadeIn key={i} delay={i * 80} className="hud-corners group">
                 <MediaPlaceholder
                   kind={item.kind}
                   label={item.label}
+                  imageUrl={item.imageUrl}
+                  alt={item.label}
                   className="transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -168,11 +180,11 @@ export default async function HomePage() {
 
       {/* 5. Proje Ortakları */}
       <section className="overflow-hidden border-b border-border">
-        <div className="container-app py-16">
+        <FadeIn className="container-app py-16">
           <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
             Proje Ortakları
           </h2>
-        </div>
+        </FadeIn>
         <div className="relative mt-2 overflow-hidden pb-16 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div className="flex w-max animate-marquee gap-4">
             {[...partnerPlaceholders, ...partnerPlaceholders].map((_, i) => (
@@ -190,18 +202,30 @@ export default async function HomePage() {
       {/* 6. İstatistik Şeridi */}
       <section className="relative overflow-hidden border-b border-border bg-surface">
         <GridBackground className="opacity-50" />
-        <div className="container-app relative grid grid-cols-2 divide-x divide-border py-16 sm:grid-cols-4">
+        <FadeIn className="container-app relative grid grid-cols-2 divide-x divide-border py-16 sm:grid-cols-4">
           <StatCounter value={stats.countries} label="Ülke" />
           <StatCounter value={stats.teams} label="Takım" />
           <StatCounter value={stats.events} label="Etkinlik" />
           <StatCounter value={stats.participants} label="Katılımcı" />
-        </div>
+        </FadeIn>
       </section>
 
       {/* 7. Alt CTA */}
       <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/gallery/medya-5.jpg"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/55" />
+          <div className="absolute inset-0 bg-linear-to-t from-background via-background/30 to-transparent" />
+        </div>
+
         <GridBackground className="opacity-30" />
-        <div className="container-app relative flex flex-col items-center gap-6 py-20 text-center">
+        <FadeIn className="container-app relative flex flex-col items-center gap-6 py-20 text-center">
           <RocketIcon className="animate-pulse-glow size-10 text-primary" aria-hidden="true" />
           <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary sm:text-4xl">
             Takımını Oluştur ve Katıl
@@ -214,7 +238,7 @@ export default async function HomePage() {
             Takımını Oluştur
             <ArrowRightIcon className="size-4" />
           </ButtonLink>
-        </div>
+        </FadeIn>
       </section>
     </div>
   );

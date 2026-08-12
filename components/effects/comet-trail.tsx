@@ -16,7 +16,7 @@ import { useEffect, useRef } from "react";
 const POOL_SIZE = 40;
 const LIFESPAN_MS = 550;
 const SPACING_PX = 8;
-const NEON_COLORS = ["#22e8ff", "#b24bff", "#ff3ec8"];
+const NEON_COLORS = ["#22e8ff", "#39ffb0", "#ff3ec8"];
 
 type Particle = {
   x: number;

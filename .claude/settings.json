@@ -9,7 +9,24 @@
       "mcp__claude_ai_Supabase__get_advisors",
       "mcp__claude_ai_Supabase__apply_migration",
       "mcp__claude_ai_Supabase__search_docs",
-      "Bash(node _tmp-create-admin.mjs)"
+      "Bash(node _tmp-create-admin.mjs)",
+      "Bash(mkdir -p \"c:/Users/User/Desktop/youth_esport/public/gallery\")",
+      "Bash(mv \"medya_bir.jpg\" \"medya-1.jpg\")",
+      "Bash(mv \"medya_2.jpg\" \"medya-2.jpg\")",
+      "Bash(mv \"medya_3.jpg\" \"medya-3.jpg\")",
+      "Bash(mv \"medya_dört.jpg\" \"medya-4.jpg\")",
+      "Bash(mv \"medya_bes.jpg\" \"medya-5.jpg\")",
+      "mcp__claude_ai_Supabase__list_projects",
+      "Bash(netstat -ano)",
+      "Bash(npx --version)",
+      "Bash(break)",
+      "Read(//tmp/**)",
+      "Bash(timeout 90 npx --yes playwright@1 install chromium --with-deps)",
+      "Bash(npx --yes playwright@1 install chromium)",
+      "Bash(tail -5 /tmp/nextdev.log 2>/dev/null)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\User\\Desktop\\youth_esport\\public"
     ]
   }
 }

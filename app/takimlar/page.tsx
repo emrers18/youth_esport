@@ -4,6 +4,7 @@ import { TeamCard } from "@/components/team-card";
 import { TeamSearch } from "@/components/team-search";
 import { EmptyState } from "@/components/empty-state";
 import { PixelShield } from "@/components/effects/pixel-icons";
+import { FadeIn } from "@/components/effects/fade-in";
 import { ButtonLink } from "@/components/ui/button-link";
 import { getAuthUser } from "@/lib/supabase-server";
 import { getApprovedTeams } from "@/lib/data";
@@ -48,15 +49,16 @@ export default async function TeamsPage({
           />
         ) : (
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {teams.map((team) => (
-              <TeamCard
-                key={team.id}
-                team={{
-                  id: team.id,
-                  name: team.name,
-                  tag: team.tag,
-                }}
-              />
+            {teams.map((team, i) => (
+              <FadeIn key={team.id} delay={i * 60}>
+                <TeamCard
+                  team={{
+                    id: team.id,
+                    name: team.name,
+                    tag: team.tag,
+                  }}
+                />
+              </FadeIn>
             ))}
           </div>
         )}

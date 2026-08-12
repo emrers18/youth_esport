@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * YouthArenaEsports design system — single dark esports theme.
+ * YouthArenaEsports design system — single bright esports theme.
  * These tokens are the source of truth referenced throughout /app and /components.
  */
 const config: Config = {
@@ -14,18 +14,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0B0E14",
-        surface: "#1A1F2B",
+        background: "#F6F9FE",
+        surface: "#FFFFFF",
         primary: {
-          DEFAULT: "#7B5CFF",
-          alt: "#4E7CFF",
+          DEFAULT: "#2563EB",
+          alt: "#DB2777",
         },
-        primaryAlt: "#4E7CFF",
-        secondary: "#39FFB0",
-        danger: "#FF4D4D",
-        warning: "#FFB84D",
-        textPrimary: "#F2F3F7",
-        textSecondary: "#9AA0B0",
+        primaryAlt: "#DB2777",
+        secondary: "#047857",
+        danger: "#DC2626",
+        warning: "#B45309",
+        textPrimary: "#0F172A",
+        textSecondary: "#51607A",
       },
       fontFamily: {
         heading: ["var(--font-rajdhani)", "sans-serif"],
@@ -45,8 +45,8 @@ const config: Config = {
         lg: "12px",
       },
       boxShadow: {
-        glow: "0 0 24px 0 rgba(123, 92, 255, 0.45)",
-        "glow-secondary": "0 0 24px 0 rgba(57, 255, 176, 0.35)",
+        glow: "0 0 24px 0 rgba(37, 99, 235, 0.35)",
+        "glow-secondary": "0 0 24px 0 rgba(4, 120, 87, 0.28)",
       },
       screens: {
         xs: "375px",

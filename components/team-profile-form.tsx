@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { ImageUpload } from "@/components/image-upload";
 import { updateTeamProfile } from "@/lib/actions/team-actions";
 import { MAIN_GAME_OPTIONS } from "@/lib/validation/team";
 
@@ -34,6 +34,7 @@ const profileSchema = z.object({
   country: z.string().min(2, "Ülke belirtin."),
   description: z.string().min(20, "Açıklama en az 20 karakter olmalı.").max(1000),
   captainEmail: z.string().email("Geçerli bir e-posta girin."),
+  logoUrl: z.string().optional(),
 });
 
 type ProfileInput = z.infer<typeof profileSchema>;
@@ -165,13 +166,25 @@ export function TeamProfileForm({
           )}
         />
 
-        <div>
-          <p className="text-sm font-medium text-textPrimary">Takım Logosu</p>
-          <div className="mt-2 flex aspect-square w-24 flex-col items-center justify-center gap-1 rounded-md border border-dashed border-border bg-background text-textSecondary">
-            <ImageIcon className="size-5 opacity-60" aria-hidden="true" />
-            <span className="text-[9px] font-medium">Yakında</span>
-          </div>
-        </div>
+        <FormField
+          control={form.control}
+          name="logoUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Takım Logosu</FormLabel>
+              <FormControl>
+                <ImageUpload
+                  value={field.value}
+                  onChange={field.onChange}
+                  folder="team-logos"
+                  aspect="square"
+                  label="Takım logosu"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button type="submit" disabled={form.formState.isSubmitting} className="self-start">
           {form.formState.isSubmitting ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}

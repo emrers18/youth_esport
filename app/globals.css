@@ -40,35 +40,35 @@
   --radius-xl: 16px;
 }
 
-/* YouthArenaEsports is a single fixed dark theme — no light-mode toggle. */
+/* YouthArenaEsports is a single fixed bright theme — no light/dark toggle. */
 :root {
-  --background: #0b0e14;
-  --foreground: #f2f3f7;
-  --card: #1a1f2b;
-  --card-foreground: #f2f3f7;
-  --popover: #1a1f2b;
-  --popover-foreground: #f2f3f7;
-  --primary: #7b5cff;
-  --primary-foreground: #f2f3f7;
-  --secondary: #39ffb0;
-  --secondary-foreground: #0b0e14;
-  --muted: #1a1f2b;
-  --muted-foreground: #9aa0b0;
-  --accent: #4e7cff;
-  --accent-foreground: #f2f3f7;
-  --destructive: #ff4d4d;
-  --border: #2a3040;
-  --input: #232838;
-  --ring: #7b5cff;
+  --background: #f6f9fe;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #047857;
+  --secondary-foreground: #ffffff;
+  --muted: #eef2f8;
+  --muted-foreground: #51607a;
+  --accent: #eff6ff;
+  --accent-foreground: #0f172a;
+  --destructive: #dc2626;
+  --border: #e1e8f2;
+  --input: #eef2f8;
+  --ring: #2563eb;
   --radius: 0.5rem;
-  --sidebar: #1a1f2b;
-  --sidebar-foreground: #f2f3f7;
-  --sidebar-primary: #7b5cff;
-  --sidebar-primary-foreground: #f2f3f7;
-  --sidebar-accent: #232838;
-  --sidebar-accent-foreground: #f2f3f7;
-  --sidebar-border: #2a3040;
-  --sidebar-ring: #7b5cff;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eff6ff;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: #e1e8f2;
+  --sidebar-ring: #2563eb;
 }
 
 @layer base {

@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusIcon, Trash2Icon, CheckCircle2Icon, ImageIcon } from "lucide-react";
+import { PlusIcon, Trash2Icon, CheckCircle2Icon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageUpload } from "@/components/image-upload";
 import {
   Select,
   SelectContent,
@@ -205,17 +206,25 @@ export function TeamApplicationForm() {
           )}
         />
 
-        <div>
-          <p className="text-sm font-medium text-textPrimary">Takım Logosu</p>
-          <div className="group relative mt-2 flex aspect-square w-32 flex-col items-center justify-center gap-2 overflow-hidden rounded-md border border-dashed border-border bg-surface text-textSecondary transition-colors hover:border-primary/50">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklch,var(--color-primary)_12%,transparent),transparent_70%)] opacity-0 transition-opacity group-hover:opacity-100" />
-            <ImageIcon className="relative size-6 opacity-60" aria-hidden="true" />
-            <span className="relative text-[10px] font-medium">Logo Yakında</span>
-          </div>
-          <p className="mt-1 text-xs text-textSecondary">
-            Dosya yükleme entegrasyonu sonraki fazda eklenecek.
-          </p>
-        </div>
+        <FormField
+          control={form.control}
+          name="logoUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Takım Logosu</FormLabel>
+              <FormControl>
+                <ImageUpload
+                  value={field.value}
+                  onChange={field.onChange}
+                  folder="team-logos"
+                  aspect="square"
+                  label="Takım logosu"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
