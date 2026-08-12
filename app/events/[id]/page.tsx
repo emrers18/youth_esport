@@ -11,8 +11,6 @@ import { getAuthUser, createClient } from "@/lib/supabase-server";
 
 export const dynamic = "force-dynamic";
 
-const galleryPlaceholders = Array.from({ length: 3 });
-
 export default async function EventDetailPage({
   params,
 }: {
@@ -74,16 +72,18 @@ export default async function EventDetailPage({
 
           <p className="whitespace-pre-line text-textSecondary">{event.description}</p>
 
-          <div>
-            <h2 className="font-heading text-lg font-semibold text-textPrimary">
-              Media Gallery
-            </h2>
-            <div className="mt-3 grid gap-4 sm:grid-cols-3">
-              {galleryPlaceholders.map((_, i) => (
-                <MediaPlaceholder key={i} aspect="square" />
-              ))}
+          {event.gallery_urls && event.gallery_urls.length > 0 && (
+            <div>
+              <h2 className="font-heading text-lg font-semibold text-textPrimary">
+                Media Gallery
+              </h2>
+              <div className="mt-3 grid gap-4 sm:grid-cols-3">
+                {event.gallery_urls.map((url: string, i: number) => (
+                  <MediaPlaceholder key={url} imageUrl={url} alt={`${event.title} photo ${i + 1}`} aspect="square" />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <aside className="hud-corners flex h-fit flex-col gap-4 rounded-lg border border-border bg-surface p-6">

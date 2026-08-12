@@ -24,7 +24,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { createClient } from "@/lib/supabase";
 import { ImageUpload } from "@/components/image-upload";
 import {
   teamApplicationSchema,
@@ -78,18 +77,12 @@ export function RegisterForm() {
       return;
     }
 
-    // Account + team application are already created server-side —
-    // clear the form now so stale/sensitive input doesn't linger.
+    // Account + team application are already created server-side, and the
+    // session was established there too — clear the form now so stale/
+    // sensitive input doesn't linger.
     form.reset();
 
-    // Sign in client-side purely to establish the session cookie.
-    const supabase = createClient();
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email: values.email,
-      password: values.password,
-    });
-
-    if (signInError) {
+    if (!result.signedIn) {
       toast.success("Your account and team application have been created. Please sign in.");
       router.push("/login");
       return;

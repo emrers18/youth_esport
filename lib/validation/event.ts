@@ -9,6 +9,7 @@ export const eventSchema = z.object({
   date: z.string().min(1, "Select a date and time."),
   location: z.string().min(2, "Specify a location."),
   imageUrl: z.string().optional(),
+  galleryUrls: z.array(z.string()).max(6, "You can add up to 6 gallery photos.").optional(),
   capacity: z.coerce.number().int().min(1, "Capacity must be at least 1."),
 });
 

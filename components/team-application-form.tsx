@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusIcon, Trash2Icon, CheckCircle2Icon } from "lucide-react";
+import { PlusIcon, Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { ButtonLink } from "@/components/ui/button-link";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/image-upload";
@@ -34,7 +33,7 @@ import {
 import { createTeamApplication } from "@/lib/actions/team-actions";
 
 export function TeamApplicationForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
 
   const form = useForm<TeamApplicationInput>({
     resolver: zodResolver(teamApplicationSchema),
@@ -61,31 +60,15 @@ export function TeamApplicationForm() {
   const onSubmit = async (values: TeamApplicationInput) => {
     const result = await createTeamApplication(values);
     if (result.success) {
-      setSubmitted(true);
+      toast.success(
+        "Your team application has been sent to our admin team. You'll be notified by email once it's reviewed."
+      );
+      router.push("/panel");
+      router.refresh();
     } else {
       toast.error(result.error ?? "Failed to submit application.");
     }
   };
-
-  if (submitted) {
-    return (
-      <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-lg border border-secondary/30 bg-secondary/10 px-6 py-16 text-center">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklch,var(--color-secondary)_18%,transparent),transparent_60%)]" />
-        <CheckCircle2Icon className="relative size-12 text-secondary animate-pulse-glow" aria-hidden="true" />
-        <h2 className="relative font-heading text-2xl font-bold text-textPrimary">
-          Application Received
-        </h2>
-        <p className="relative max-w-md text-textSecondary">
-          Your team application has been sent to our admin team. You&apos;ll be
-          notified by email once it&apos;s reviewed. You can track the status from
-          your Team Panel.
-        </p>
-        <ButtonLink href="/panel" className="relative shadow-glow">
-          Go to My Panel
-        </ButtonLink>
-      </div>
-    );
-  }
 
   return (
     <Form {...form}>

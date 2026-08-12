@@ -23,7 +23,7 @@ export async function uploadMedia(formData: FormData): Promise<UploadMediaResult
   if (!(file instanceof File)) {
     return { success: false, error: "Invalid file." };
   }
-  if (folder !== "team-logos" && folder !== "event-images") {
+  if (folder !== "team-logos" && folder !== "event-images" && folder !== "event-gallery") {
     return { success: false, error: "Invalid folder." };
   }
   if (!ACCEPTED_TYPES.includes(file.type)) {

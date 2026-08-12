@@ -24,7 +24,8 @@
       "Bash(timeout 90 npx --yes playwright@1 install chromium --with-deps)",
       "Bash(npx --yes playwright@1 install chromium)",
       "Bash(tail -5 /tmp/nextdev.log 2>/dev/null)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(xargs grep -l \"signUp\\\\|signInWithPassword\\\\|auth.admin\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\User\\Desktop\\youth_esport\\public"

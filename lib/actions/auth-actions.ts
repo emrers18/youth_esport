@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { createClient } from "@/lib/supabase-server";
 import { sendTeamApplicationEmail } from "@/lib/email";
 import { teamApplicationSchema } from "@/lib/validation/team";
 
@@ -13,7 +14,9 @@ const registerTeamSchema = z
   .extend(teamApplicationSchema.shape);
 
 export type RegisterTeamInput = z.infer<typeof registerTeamSchema>;
-export type RegisterTeamState = { success: boolean; error?: string };
+export type RegisterTeamState =
+  | { success: true; signedIn: boolean }
+  | { success: false; error: string };
 
 /**
  * Creates the auth account and the team application in one atomic,
@@ -90,5 +93,11 @@ export async function registerTeamWithAccount(
 
   await sendTeamApplicationEmail({ teamName: name, country, captainEmail });
 
-  return { success: true };
+  // Sign in here (server-side, cookie-writing client) so the session is
+  // already established by the time this action returns — the caller can
+  // go straight to the panel instead of sending the user back to /login.
+  const supabase = await createClient();
+  const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+
+  return { success: true, signedIn: !signInError };
 }

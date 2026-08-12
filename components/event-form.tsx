@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ImageUpload } from "@/components/image-upload";
+import { GalleryUpload } from "@/components/gallery-upload";
 import { eventSchema, type EventInput } from "@/lib/validation/event";
 import { createEvent } from "@/lib/actions/event-actions";
 
@@ -30,6 +31,7 @@ export function EventForm() {
       date: "",
       location: "",
       imageUrl: "",
+      galleryUrls: [],
       capacity: 20,
     },
   });
@@ -131,6 +133,25 @@ export function EventForm() {
                   folder="event-images"
                   aspect="video"
                   label="Event image"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="galleryUrls"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Media Gallery</FormLabel>
+              <FormControl>
+                <GalleryUpload
+                  value={field.value}
+                  onChange={field.onChange}
+                  folder="event-gallery"
+                  label="Gallery photo"
                 />
               </FormControl>
               <FormMessage />

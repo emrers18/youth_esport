@@ -28,7 +28,7 @@ export async function createEvent(input: EventInput): Promise<ActionResult> {
     return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid form data." };
   }
 
-  const { title, description, date, location, imageUrl, capacity } = parsed.data;
+  const { title, description, date, location, imageUrl, galleryUrls, capacity } = parsed.data;
 
   const { error } = await supabase.from("events").insert({
     title,
@@ -36,6 +36,7 @@ export async function createEvent(input: EventInput): Promise<ActionResult> {
     date: new Date(date).toISOString(),
     location,
     image_url: imageUrl || null,
+    gallery_urls: galleryUrls ?? [],
     capacity,
     team_id: team.id,
   });
