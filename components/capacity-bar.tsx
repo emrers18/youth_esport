@@ -3,10 +3,12 @@ import { cn } from "@/lib/utils";
 export function CapacityBar({
   current,
   capacity,
+  label = "Teams",
   className,
 }: {
   current: number;
   capacity: number;
+  label?: string;
   className?: string;
 }) {
   const pct = capacity > 0 ? Math.min(100, Math.round((current / capacity) * 100)) : 0;
@@ -15,7 +17,7 @@ export function CapacityBar({
   return (
     <div className={cn("flex flex-col gap-1", className)}>
       <div className="flex items-center justify-between text-xs text-textSecondary">
-        <span>Capacity</span>
+        <span>{label}</span>
         <span className={cn("font-semibold tabular-nums", isFull ? "text-danger" : "text-textPrimary")}>
           {current}/{capacity}
         </span>

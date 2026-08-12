@@ -10,7 +10,7 @@ export const eventSchema = z.object({
   location: z.string().min(2, "Specify a location."),
   imageUrl: z.string().optional(),
   galleryUrls: z.array(z.string()).max(6, "You can add up to 6 gallery photos.").optional(),
-  capacity: z.coerce.number().int().min(1, "Capacity must be at least 1."),
+  capacity: z.coerce.number().int().min(1, "Team capacity must be at least 1."),
 });
 
 export type EventInput = z.infer<typeof eventSchema>;

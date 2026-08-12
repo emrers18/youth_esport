@@ -111,10 +111,13 @@ export function EventForm() {
           name="capacity"
           render={({ field }) => (
             <FormItem className="max-w-xs">
-              <FormLabel>Capacity</FormLabel>
+              <FormLabel>Team Capacity</FormLabel>
               <FormControl>
                 <Input type="number" min={1} {...field} />
               </FormControl>
+              <p className="text-xs text-textSecondary">
+                Maximum number of teams that can join this event.
+              </p>
               <FormMessage />
             </FormItem>
           )}
