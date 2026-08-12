@@ -2,7 +2,7 @@
 trigger: always_on
 ---
 
-# PRD — YouthArenaEsports Web Platformu
+# PRD — YouthEsportsArena Web Platformu
 ## Bölüm 3/4: Kullanıcı Akışları, Bildirim Akışı ve Marka/Tasarım Sistemi
 
 *(Bölüm 2/4'ün devamıdır — Sayfa Gereksinimleri için Dosya 2'ye bakınız)*
@@ -105,7 +105,7 @@ Admin Girişi → Admin Paneli
 ### 9.5. Navbar ve Footer Standartları
 
 **Navbar (Tüm sayfalarda sabit, sticky):**
-- Sol: YouthArenaEsports logosu/wordmark (placeholder logo alanı)
+- Sol: YouthEsportsArena logosu/wordmark (placeholder logo alanı)
 - Orta/Sağ: Ana Sayfa, Proje Çıktıları, Takımlar, Etkinlikler linkleri
 - Sağ uç: "Takım Girişi" butonu (giriş yapılmamışsa) / Kullanıcı adı + "Panel" (giriş yapılmışsa)
 - En sağda küçük, ayrık "Admin" linki (görsel olarak diğer navigasyondan hafif ayrıştırılmış — küçük ikon)

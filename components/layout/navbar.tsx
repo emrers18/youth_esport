@@ -77,9 +77,9 @@ export function Navbar({ session }: { session: Session | null }) {
             className="size-6 text-primary transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110"
             aria-hidden="true"
           />
-          YouthArena
+          YouthEsports
           <span className="text-primary transition-[text-shadow] duration-300 group-hover:text-glow-primary">
-            Esports
+            Arena
           </span>
         </Link>
 

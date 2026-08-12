@@ -24,7 +24,7 @@ export function Footer() {
         <div className="flex flex-col gap-3 sm:col-span-2 lg:col-span-1">
           <Link href="/" className="flex items-center gap-2 font-heading text-lg font-bold text-textPrimary">
             <GamepadIcon className="size-6 text-primary" aria-hidden="true" />
-            YouthArena<span className="text-primary">Esports</span>
+            YouthEsports<span className="text-primary">Arena</span>
           </Link>
           <p className="text-sm text-textSecondary">
             The official website and participant management tool of the
@@ -93,7 +93,7 @@ export function Footer() {
             the authors, and the European Commission cannot be held responsible
             for any use which may be made of the information contained herein.
           </p>
-          <p>© {new Date().getFullYear()} YouthArenaEsports. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} YouthEsportsArena. All rights reserved.</p>
         </div>
       </div>
     </footer>

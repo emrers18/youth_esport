@@ -1,4 +1,4 @@
-# YouthArenaEsports
+# YouthEsportsArena
 
 The official website and participant management tool of the "Bridges: Anti
 Discriminatory Language and Esports" Erasmus+ project.

@@ -56,7 +56,7 @@ export default async function HomePage() {
             Bridges: Anti Discriminatory Language and Esports
           </span>
           <h1 className="text-glow-primary font-heading text-4xl font-bold tracking-wide text-textPrimary sm:text-6xl lg:text-7xl">
-            YouthArena<span className="text-primary">Esports</span>
+            YouthEsports<span className="text-primary">Arena</span>
           </h1>
           <p className="max-w-xl text-balance text-lg text-textSecondary">
             As an Erasmus+ funded youth project, we bring together young teams
@@ -91,7 +91,7 @@ export default async function HomePage() {
               to strengthen inclusive communication skills.
             </p>
             <p className="text-textSecondary">
-              The YouthArenaEsports platform is the official participant
+              The YouthEsportsArena platform is the official participant
               management tool for teams taking part in the project, letting
               them gain visibility, organize events, and easily access the
               project&apos;s outputs.
@@ -231,7 +231,7 @@ export default async function HomePage() {
             Create Your Team and Join
           </h2>
           <p className="max-w-xl text-balance text-textSecondary">
-            Join the YouthArenaEsports community, apply with your team, and
+            Join the YouthEsportsArena community, apply with your team, and
             connect with young players from across Europe.
           </p>
           <ButtonLink href="/teams" size="lg" className="shadow-glow">

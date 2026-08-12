@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * YouthArenaEsports design system — single bright esports theme.
+ * YouthEsportsArena design system — single bright esports theme.
  * These tokens are the source of truth referenced throughout /app and /components.
  */
 const config: Config = {

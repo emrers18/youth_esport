@@ -57,7 +57,7 @@ export async function sendApprovalEmail(params: {
     subject: `${teamName} has been approved!`,
     html: `
       <p>Hello,</p>
-      <p><strong>${teamName}</strong>'s YouthArenaEsports application has been approved. Your team will now be shown on the Teams page and you can create events.</p>
+      <p><strong>${teamName}</strong>'s YouthEsportsArena application has been approved. Your team will now be shown on the Teams page and you can create events.</p>
     `,
   });
 }
@@ -73,7 +73,7 @@ export async function sendRejectionEmail(params: {
     subject: `About your ${teamName} application`,
     html: `
       <p>Hello,</p>
-      <p><strong>${teamName}</strong>'s YouthArenaEsports application was not approved at this stage.</p>
+      <p><strong>${teamName}</strong>'s YouthEsportsArena application was not approved at this stage.</p>
       ${rejectionNote ? `<p><strong>Note:</strong> ${rejectionNote}</p>` : ""}
       <p>Feel free to reach out to us with any questions.</p>
     `,

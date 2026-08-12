@@ -2,7 +2,7 @@
 trigger: always_on
 ---
 
-# PRD — YouthArenaEsports Web Platformu
+# PRD — YouthEsportsArena Web Platformu
 ## Bölüm 4/4: Erişilebilirlik, Teknik Kapsam, Riskler, Açık Sorular ve Onay
 
 *(Bölüm 3/4'ün devamıdır — Akışlar ve Tasarım Sistemi için Dosya 3'e bakınız)*
@@ -75,7 +75,7 @@ trigger: always_on
 
 ---
 
-*Bu doküman (4 dosya halinde), YouthArenaEsports platformunun v1.0 geliştirme kapsamını tanımlar. Tasarım sisteminde (Dosya 3/4 — Bölüm 9) tanımlanan renk, tipografi ve bileşen standartları proje boyunca sabit kalacak ve herhangi bir sayfa veya bileşen bu standartların dışına çıkmayacaktır.*
+*Bu doküman (4 dosya halinde), YouthEsportsArena platformunun v1.0 geliştirme kapsamını tanımlar. Tasarım sisteminde (Dosya 3/4 — Bölüm 9) tanımlanan renk, tipografi ve bileşen standartları proje boyunca sabit kalacak ve herhangi bir sayfa veya bileşen bu standartların dışına çıkmayacaktır.*
 
 **Dosya Yapısı:**
 1. `constitution.md` — Teknoloji stack, özet, hedefler, roller, site haritası

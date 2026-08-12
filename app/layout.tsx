@@ -20,7 +20,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "YouthArenaEsports | Bridges: Anti Discriminatory Language and Esports",
+  title: "YouthEsportsArena | Bridges: Anti Discriminatory Language and Esports",
   description:
     "The official website and participant management tool of the Bridges: Anti Discriminatory Language and Esports Erasmus+ project.",
 };

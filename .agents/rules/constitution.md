@@ -2,11 +2,11 @@
 trigger: always_on
 ---
 
-# PRD — YouthArenaEsports Web Platformu
+# PRD — YouthEsportsArena Web Platformu
 ## Bölüm 1/4: Kullanılacak Teknolojiler, Genel Bakış ve Kapsam
 
 **Proje:** Bridges: Anti Discriminatory Language and Esports (Erasmus+ Projesi)
-**Ürün Adı:** YouthArenaEsports
+**Ürün Adı:** YouthEsportsArena
 **Doküman Tipi:** Product Requirements Document (PRD)
 **Versiyon:** 1.0
 **Tarih:** Ağustos 2026
@@ -66,7 +66,7 @@ Eğer proje bütçesi/ekip kapasitesi kısıtlıysa, aşağıdaki "no-code / low
 
 ## 1. Yönetici Özeti
 
-YouthArenaEsports, "Bridges: Anti Discriminatory Language and Esports" Erasmus+ projesinin dijital yüzü ve operasyonel aracı olacak bir web platformudur. Platform iki amaca hizmet eder:
+YouthEsportsArena, "Bridges: Anti Discriminatory Language and Esports" Erasmus+ projesinin dijital yüzü ve operasyonel aracı olacak bir web platformudur. Platform iki amaca hizmet eder:
 
 1. **Tanıtım:** Projenin amacını, çıktılarını ve katılımcı gruplarını (herkese açık, giriş gerektirmeyen) şekilde sergilemek.
 2. **Operasyon:** Proje süresince gerçek katılımcı takımların kayıt olup onaylanmasını, etkinlik (event) oluşturmasını ve etkinliklere katılım sürecini yönetmesini sağlamak.
@@ -78,7 +78,7 @@ Site canlıya alındığında, proje takvimindeki gerçek katılımcılar bu pla
 ## 2. Proje Arka Planı
 
 - **Üst Proje:** Bridges: Anti Discriminatory Language and Esports — Erasmus+ kapsamında yürütülen, espor (e-sports) aracılığıyla ayrımcı olmayan dil ve kapsayıcılığı genç toplulukları arasında yaymayı hedefleyen bir proje.
-- **Web Ürünü:** YouthArenaEsports, bu projenin görünür yüzü ve katılımcı yönetim aracıdır.
+- **Web Ürünü:** YouthEsportsArena, bu projenin görünür yüzü ve katılımcı yönetim aracıdır.
 - **Tema:** Espor (e-sports) temalı, dijital/gaming estetiğine sahip, gençlere hitap eden modern bir tasarım dili.
 
 ---
@@ -111,7 +111,7 @@ Site canlıya alındığında, proje takvimindeki gerçek katılımcılar bu pla
 ## 5. Bilgi Mimarisi / Site Haritası
 
 ```
-YouthArenaEsports
+YouthEsportsArena
 │
 ├── Navbar (Tüm sayfalarda sabit)
 │   ├── Ana Sayfa

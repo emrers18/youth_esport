@@ -2,7 +2,7 @@
 trigger: always_on
 ---
 
-# PRD — YouthArenaEsports Web Platformu
+# PRD — YouthEsportsArena Web Platformu
 ## Bölüm 2/4: Sayfa Bazlı Gereksinimler
 
 *(Bölüm 1/4'ün devamıdır — Teknoloji, Genel Bakış, Roller ve Site Haritası için Dosya 1'e bakınız)*
@@ -18,7 +18,7 @@ trigger: always_on
 **İçerik Blokları (yukarıdan aşağıya sırayla):**
 
 1. **Hero Bölümü**
-   - Büyük başlık: "YouthArenaEsports"
+   - Büyük başlık: "YouthEsportsArena"
    - Alt başlık: Proje adı — "Bridges: Anti Discriminatory Language and Esports"
    - Kısa tanıtım cümlesi (1-2 cümle)
    - CTA butonları: "Takımları Keşfet", "Etkinlikleri Gör"
