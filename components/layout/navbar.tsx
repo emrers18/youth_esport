@@ -77,10 +77,7 @@ export function Navbar({ session }: { session: Session | null }) {
             className="size-10 transition-transform duration-300 group-hover:scale-105"
             priority
           />
-          YouthEsports
-          <span className="text-primary transition-[text-shadow] duration-300 group-hover:text-glow-primary">
-            Arena
-          </span>
+          YouthEsportsArena
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">

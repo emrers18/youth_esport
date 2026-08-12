@@ -51,7 +51,7 @@ export default async function HomePage() {
 
         <div className="container-app relative flex min-h-130 flex-col items-start justify-end gap-6 py-14 text-left sm:min-h-155 sm:py-20">
           <h1 className="font-valorant text-4xl font-bold uppercase tracking-wide text-textPrimary sm:text-5xl lg:text-6xl">
-            YouthEsports<span className="text-gold text-glow-gold">Arena</span>
+            Youth<span className="text-primary">Esports</span>Arena
           </h1>
           <p className="max-w-xl text-balance font-valorant text-xl tracking-wide text-textSecondary">
             As an Erasmus+ funded youth project, we bring together young teams
