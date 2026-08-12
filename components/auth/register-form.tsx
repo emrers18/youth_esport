@@ -348,7 +348,7 @@ export function RegisterForm() {
           </div>
         </div>
 
-        <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
+        <Button type="submit" size="lg" variant="gold" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? "Creating account..." : "Sign Up and Apply"}
         </Button>
       </form>

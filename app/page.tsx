@@ -234,7 +234,7 @@ export default async function HomePage() {
             Join the YouthEsportsArena community, apply with your team, and
             connect with young players from across Europe.
           </p>
-          <ButtonLink href="/teams" size="lg" className="shadow-glow">
+          <ButtonLink href="/teams" size="lg" variant="gold">
             Create Your Team
             <ArrowRightIcon className="size-4" />
           </ButtonLink>

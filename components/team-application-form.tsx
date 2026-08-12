@@ -296,7 +296,7 @@ export function TeamApplicationForm() {
           ))}
         </div>
 
-        <Button type="submit" size="lg" disabled={form.formState.isSubmitting} className="self-start shadow-glow">
+        <Button type="submit" size="lg" variant="gold" disabled={form.formState.isSubmitting} className="self-start">
           {form.formState.isSubmitting ? "Submitting..." : "Submit Application"}
         </Button>
       </form>
