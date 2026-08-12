@@ -21,13 +21,13 @@ export function EventCard({ event }: { event: EventCardData }) {
   return (
     <Card className="hud-corners group relative overflow-hidden border-border bg-surface py-0 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-glow">
       <Link
-        href={`/etkinlikler/${event.id}`}
+        href={`/events/${event.id}`}
         className="absolute inset-0 z-10"
         aria-label={event.title}
       />
       <MediaPlaceholder
         imageUrl={event.imageUrl}
-        alt={`${event.title} görseli`}
+        alt={`${event.title} image`}
         aspect="video"
         className="rounded-none transition-transform duration-500 group-hover:scale-105"
       />
@@ -37,7 +37,7 @@ export function EventCard({ event }: { event: EventCardData }) {
         </h3>
 
         <Link
-          href={`/takimlar/${event.team.id}`}
+          href={`/teams/${event.team.id}`}
           className="relative z-20 w-fit text-xs font-medium text-primaryAlt hover:underline"
         >
           {event.team.name}
@@ -59,7 +59,7 @@ export function EventCard({ event }: { event: EventCardData }) {
         <CapacityBar current={event._count?.participants ?? 0} capacity={event.capacity} />
 
         <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-          Detay Gör
+          View Details
           <ArrowRightIcon className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
         </span>
       </CardContent>

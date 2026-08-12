@@ -23,16 +23,16 @@ export function EventParticipationButton({
 
   if (!isLoggedIn) {
     return (
-      <ButtonLink href="/giris" className="w-full">
-        Katılmak için Giriş Yap
+      <ButtonLink href="/login" className="w-full">
+        Sign In to Join
       </ButtonLink>
     );
   }
 
   if (!canParticipate) {
     return (
-      <Button className="w-full" disabled title="Yalnızca onaylı takımlar katılabilir.">
-        Katılım Yalnızca Onaylı Takımlar İçin
+      <Button className="w-full" disabled title="Only approved teams can participate.">
+        Participation Is for Approved Teams Only
       </Button>
     );
   }
@@ -41,10 +41,10 @@ export function EventParticipationButton({
     startTransition(async () => {
       const result = await toggleEventParticipation(eventId);
       if (result.success) {
-        toast.success(isParticipating ? "Katılımdan ayrıldınız." : "Etkinliğe katıldınız.");
+        toast.success(isParticipating ? "You left the event." : "You joined the event.");
         router.refresh();
       } else {
-        toast.error(result.error ?? "İşlem başarısız oldu.");
+        toast.error(result.error ?? "The action failed.");
       }
     });
   };
@@ -56,7 +56,7 @@ export function EventParticipationButton({
       onClick={handleClick}
       disabled={isPending}
     >
-      {isPending ? "İşleniyor..." : isParticipating ? "Katılımdan Ayrıl" : "Etkinliğe Katıl"}
+      {isPending ? "Processing..." : isParticipating ? "Leave Event" : "Join Event"}
     </Button>
   );
 }

@@ -13,12 +13,12 @@ export async function createTeamApplication(
 ): Promise<ActionResult> {
   const user = await getAuthUser();
   if (!user || user.role !== "TEAM") {
-    return { success: false, error: "Takım başvurusu için giriş yapmalısınız." };
+    return { success: false, error: "You must be signed in to apply as a team." };
   }
 
   const parsed = teamApplicationSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Geçersiz form verisi." };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid form data." };
   }
 
   const supabase = await createClient();
@@ -31,7 +31,7 @@ export async function createTeamApplication(
     .maybeSingle();
 
   if (existing) {
-    return { success: false, error: "Zaten bir takım başvurunuz bulunuyor." };
+    return { success: false, error: "You already have a team application." };
   }
 
   const { name, tag, mainGame, country, description, captainEmail, logoUrl, members } =
@@ -54,7 +54,7 @@ export async function createTeamApplication(
     .single();
 
   if (teamError) {
-    return { success: false, error: "Takım oluşturulurken bir hata oluştu." };
+    return { success: false, error: "An error occurred while creating the team." };
   }
 
   // Create members
@@ -77,7 +77,7 @@ export async function createTeamApplication(
 
   await sendTeamApplicationEmail({ teamName: name, country, captainEmail });
 
-  revalidatePath("/takimlar");
+  revalidatePath("/teams");
   revalidatePath("/panel");
   revalidatePath("/admin");
 
@@ -87,7 +87,7 @@ export async function createTeamApplication(
 export async function approveTeam(teamId: string): Promise<ActionResult> {
   const user = await getAuthUser();
   if (user?.role !== "ADMIN") {
-    return { success: false, error: "Yetkiniz yok." };
+    return { success: false, error: "You do not have permission to do this." };
   }
 
   const supabase = await createClient();
@@ -100,12 +100,12 @@ export async function approveTeam(teamId: string): Promise<ActionResult> {
     .single();
 
   if (error) {
-    return { success: false, error: "Takım onaylanırken bir hata oluştu." };
+    return { success: false, error: "An error occurred while approving the team." };
   }
 
   await sendApprovalEmail({ teamName: team.name, captainEmail: team.captain_email });
 
-  revalidatePath("/takimlar");
+  revalidatePath("/teams");
   revalidatePath("/panel");
   revalidatePath("/admin");
   revalidatePath("/");
@@ -119,7 +119,7 @@ export async function rejectTeam(
 ): Promise<ActionResult> {
   const user = await getAuthUser();
   if (user?.role !== "ADMIN") {
-    return { success: false, error: "Yetkiniz yok." };
+    return { success: false, error: "You do not have permission to do this." };
   }
 
   const supabase = await createClient();
@@ -132,7 +132,7 @@ export async function rejectTeam(
     .single();
 
   if (error) {
-    return { success: false, error: "Takım reddedilirken bir hata oluştu." };
+    return { success: false, error: "An error occurred while rejecting the team." };
   }
 
   await sendRejectionEmail({
@@ -141,7 +141,7 @@ export async function rejectTeam(
     rejectionNote,
   });
 
-  revalidatePath("/takimlar");
+  revalidatePath("/teams");
   revalidatePath("/panel");
   revalidatePath("/admin");
 
@@ -151,7 +151,7 @@ export async function rejectTeam(
 export async function removeTeam(teamId: string): Promise<ActionResult> {
   const user = await getAuthUser();
   if (user?.role !== "ADMIN") {
-    return { success: false, error: "Yetkiniz yok." };
+    return { success: false, error: "You do not have permission to do this." };
   }
 
   const supabase = await createClient();
@@ -159,10 +159,10 @@ export async function removeTeam(teamId: string): Promise<ActionResult> {
   const { error } = await supabase.from("teams").delete().eq("id", teamId);
 
   if (error) {
-    return { success: false, error: "Takım silinirken bir hata oluştu." };
+    return { success: false, error: "An error occurred while deleting the team." };
   }
 
-  revalidatePath("/takimlar");
+  revalidatePath("/teams");
   revalidatePath("/admin");
   revalidatePath("/");
 
@@ -180,7 +180,7 @@ export async function updateTeamProfile(input: {
 }): Promise<ActionResult> {
   const user = await getAuthUser();
   if (!user || user.role !== "TEAM") {
-    return { success: false, error: "Giriş yapmalısınız." };
+    return { success: false, error: "You must be signed in." };
   }
 
   const supabase = await createClient();
@@ -192,7 +192,7 @@ export async function updateTeamProfile(input: {
     .maybeSingle();
 
   if (!team) {
-    return { success: false, error: "Takım bulunamadı." };
+    return { success: false, error: "Team not found." };
   }
 
   const { error } = await supabase
@@ -209,11 +209,11 @@ export async function updateTeamProfile(input: {
     .eq("id", team.id);
 
   if (error) {
-    return { success: false, error: "Profil güncellenirken bir hata oluştu." };
+    return { success: false, error: "An error occurred while updating the profile." };
   }
 
   revalidatePath("/panel");
-  revalidatePath("/takimlar");
+  revalidatePath("/teams");
 
   return { success: true };
 }

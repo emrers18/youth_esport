@@ -41,10 +41,10 @@ import {
 } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "/", label: "Ana Sayfa" },
-  { href: "/ciktilar", label: "Proje Çıktıları" },
-  { href: "/takimlar", label: "Takımlar" },
-  { href: "/etkinlikler", label: "Etkinlikler" },
+  { href: "/", label: "Home" },
+  { href: "/outputs", label: "Project Outputs" },
+  { href: "/teams", label: "Teams" },
+  { href: "/events", label: "Events" },
 ];
 
 export function Navbar({ session }: { session: Session | null }) {
@@ -55,12 +55,12 @@ export function Navbar({ session }: { session: Session | null }) {
   const user = session?.user;
   const isAdmin = user?.role === "ADMIN";
   const panelHref = isAdmin ? "/admin" : "/panel";
-  const panelLabel = isAdmin ? "Admin Paneli" : "Panelim";
+  const panelLabel = isAdmin ? "Admin Panel" : "My Panel";
 
   const handleLogout = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    toast.success("Çıkış yapıldı.");
+    toast.success("Signed out.");
     setOpen(false);
     router.push("/");
     router.refresh();
@@ -83,7 +83,7 @@ export function Navbar({ session }: { session: Session | null }) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Ana navigasyon">
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
@@ -127,26 +127,26 @@ export function Navbar({ session }: { session: Session | null }) {
                   {panelLabel}
                 </DropdownMenuItem>
                 {!isAdmin && (
-                  <DropdownMenuItem render={<Link href="/admin/giris" />}>
+                  <DropdownMenuItem render={<Link href="/admin/login" />}>
                     <ShieldIcon className="size-4" aria-hidden="true" />
-                    Admin Girişi
+                    Admin Login
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem variant="destructive" onClick={handleLogout}>
                   <LogOutIcon className="size-4" aria-hidden="true" />
-                  Çıkış Yap
+                  Sign Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <>
-              <ButtonLink href="/giris">Takım Girişi</ButtonLink>
+              <ButtonLink href="/login">Team Login</ButtonLink>
               <div className="h-6 w-px bg-border" aria-hidden="true" />
               <Link
-                href="/admin/giris"
+                href="/admin/login"
                 className="flex items-center gap-1 text-xs text-textSecondary transition-colors hover:text-primary"
-                aria-label="Admin girişi"
+                aria-label="Admin login"
               >
                 <ShieldIcon className="size-3.5" aria-hidden="true" />
                 Admin
@@ -158,16 +158,16 @@ export function Navbar({ session }: { session: Session | null }) {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             render={
-              <Button variant="outline" size="icon" className="md:hidden" aria-label="Menüyü aç" />
+              <Button variant="outline" size="icon" className="md:hidden" aria-label="Open menu" />
             }
           >
             <MenuIcon className="size-5" />
           </SheetTrigger>
           <SheetContent side="right" className="w-72 border-border bg-surface">
             <SheetHeader>
-              <SheetTitle className="font-heading text-textPrimary">Menü</SheetTitle>
+              <SheetTitle className="font-heading text-textPrimary">Menu</SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col gap-1 px-4" aria-label="Mobil navigasyon">
+            <nav className="flex flex-col gap-1 px-4" aria-label="Mobile navigation">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -189,12 +189,12 @@ export function Navbar({ session }: { session: Session | null }) {
                   </ButtonLink>
                   {!isAdmin && (
                     <Link
-                      href="/admin/giris"
+                      href="/admin/login"
                       onClick={() => setOpen(false)}
                       className="mt-2 flex items-center gap-1.5 px-3 py-2 text-xs text-textSecondary"
                     >
                       <ShieldIcon className="size-3.5" aria-hidden="true" />
-                      Admin girişi
+                      Admin login
                     </Link>
                   )}
                   <Button
@@ -203,21 +203,21 @@ export function Navbar({ session }: { session: Session | null }) {
                     className="mt-2 w-full justify-center border-danger/40 text-danger hover:bg-danger/10"
                   >
                     <LogOutIcon className="size-4" aria-hidden="true" />
-                    Çıkış Yap
+                    Sign Out
                   </Button>
                 </>
               ) : (
                 <>
-                  <ButtonLink href="/giris" onClick={() => setOpen(false)} className="w-full">
-                    Takım Girişi
+                  <ButtonLink href="/login" onClick={() => setOpen(false)} className="w-full">
+                    Team Login
                   </ButtonLink>
                   <Link
-                    href="/admin/giris"
+                    href="/admin/login"
                     onClick={() => setOpen(false)}
                     className="mt-2 flex items-center gap-1.5 px-3 py-2 text-xs text-textSecondary"
                   >
                     <ShieldIcon className="size-3.5" aria-hidden="true" />
-                    Admin girişi
+                    Admin login
                   </Link>
                 </>
               )}

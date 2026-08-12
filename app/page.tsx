@@ -15,12 +15,12 @@ export const dynamic = "force-dynamic";
 const HERO_VIDEO_ID = "F7HFWuo_utY";
 
 const galleryItems = [
-  { kind: "image" as const, label: "Turnuva Anları", imageUrl: "/gallery/medya-1.jpg" },
-  { kind: "image" as const, label: "Açılış Töreni", imageUrl: "/gallery/medya-2.jpg" },
-  { kind: "image" as const, label: "Topluluk Buluşması", imageUrl: "/gallery/medya-3.jpg" },
-  { kind: "image" as const, label: "Atölye Çalışması", imageUrl: "/gallery/medya-4.jpg" },
-  { kind: "image" as const, label: "Takım Röportajı", imageUrl: "/gallery/medya-5.jpg" },
-  { kind: "image" as const, label: "Ödül Töreni", imageUrl: "/gallery/medya-6.jpg" },
+  { kind: "image" as const, label: "Tournament Moments", imageUrl: "/gallery/medya-1.jpg" },
+  { kind: "image" as const, label: "Opening Ceremony", imageUrl: "/gallery/medya-2.jpg" },
+  { kind: "image" as const, label: "Community Meetup", imageUrl: "/gallery/medya-3.jpg" },
+  { kind: "image" as const, label: "Workshop Session", imageUrl: "/gallery/medya-4.jpg" },
+  { kind: "image" as const, label: "Team Interview", imageUrl: "/gallery/medya-5.jpg" },
+  { kind: "image" as const, label: "Award Ceremony", imageUrl: "/gallery/medya-6.jpg" },
 ];
 
 const partnerPlaceholders = Array.from({ length: 6 });
@@ -59,42 +59,42 @@ export default async function HomePage() {
             YouthArena<span className="text-primary">Esports</span>
           </h1>
           <p className="max-w-xl text-balance text-lg text-textSecondary">
-            Erasmus+ destekli bir gençlik projesi olarak, espor topluluklarında
-            saygılı ve kapsayıcı bir dil kültürü inşa etmek için Avrupa
-            genelindeki genç takımları bir araya getiriyoruz.
+            As an Erasmus+ funded youth project, we bring together young teams
+            from across Europe to build a respectful and inclusive language
+            culture in esports communities.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/takimlar" size="lg" className="shadow-glow">
-              Takımları Keşfet
+            <ButtonLink href="/teams" size="lg" className="shadow-glow">
+              Explore Teams
               <ArrowRightIcon className="size-4" />
             </ButtonLink>
-            <ButtonLink href="/etkinlikler" size="lg" variant="outline">
-              Etkinlikleri Gör
+            <ButtonLink href="/events" size="lg" variant="outline">
+              View Events
             </ButtonLink>
           </div>
         </div>
       </section>
 
-      {/* 2. Proje Hakkında */}
+      {/* 2. About the Project */}
       <section className="border-b border-border">
         <FadeIn className="container-app grid gap-10 py-16 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col gap-4">
             <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
-              Proje Hakkında
+              About the Project
             </h2>
             <p className="text-textSecondary">
-              Bridges: Anti Discriminatory Language and Esports, gençlerin espor
-              ortamlarında karşılaştığı ayrımcı dil ve dışlayıcı davranışlarla
-              mücadele etmek amacıyla kurulan bir Erasmus+ iş birliği projesidir.
-              Proje, farklı ülkelerden gençlik kuruluşlarını ve espor
-              topluluklarını bir araya getirerek kapsayıcı iletişim
-              becerilerini güçlendirmeyi hedefler.
+              Bridges: Anti Discriminatory Language and Esports is an Erasmus+
+              cooperation project established to combat discriminatory
+              language and exclusionary behavior faced by young people in
+              esports environments. The project brings together youth
+              organizations and esports communities from different countries
+              to strengthen inclusive communication skills.
             </p>
             <p className="text-textSecondary">
-              YouthArenaEsports platformu, projeye katılan takımların
-              görünürlük kazanmasını, etkinlik düzenlemesini ve proje
-              çıktılarına kolayca erişmesini sağlayan resmi katılımcı yönetim
-              aracıdır.
+              The YouthArenaEsports platform is the official participant
+              management tool for teams taking part in the project, letting
+              them gain visibility, organize events, and easily access the
+              project&apos;s outputs.
             </p>
           </div>
           <div className="hud-corners">
@@ -102,14 +102,14 @@ export default async function HomePage() {
               aspect="video"
               kind="image"
               imageUrl="/gallery/esport.jpg"
-              alt="Proje Tanıtım Görseli"
-              label="Proje Tanıtım Görseli"
+              alt="Project Introduction Image"
+              label="Project Introduction Image"
             />
           </div>
         </FadeIn>
       </section>
 
-      {/* 3. Öne Çıkan Takımlar */}
+      {/* 3. Featured Teams */}
       <section className="border-b border-border">
         <FadeIn className="container-app py-16">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
@@ -117,18 +117,18 @@ export default async function HomePage() {
               <PixelTrophy className="text-primary" />
               <div>
                 <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
-                  Öne Çıkan Takımlar
+                  Featured Teams
                 </h2>
                 <p className="mt-2 text-textSecondary">
-                  Projeye katılan onaylı takımlardan bir seçki.
+                  A selection of approved teams taking part in the project.
                 </p>
               </div>
             </div>
             <Link
-              href="/takimlar"
+              href="/teams"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              Tüm Takımları Gör →
+              View All Teams →
             </Link>
           </div>
 
@@ -147,19 +147,19 @@ export default async function HomePage() {
             </div>
           ) : (
             <p className="mt-8 text-textSecondary">
-              Henüz onaylı takım bulunmuyor. İlk takımı sen oluştur!
+              There are no approved teams yet. Create the first one!
             </p>
           )}
         </FadeIn>
       </section>
 
-      {/* 4. Medya Galerisi */}
+      {/* 4. Media Gallery */}
       <section className="border-b border-border">
         <div className="container-app py-16">
           <FadeIn className="flex items-center gap-3">
             <PixelJoystick className="text-secondary" />
             <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
-              Medya Galerisi
+              Media Gallery
             </h2>
           </FadeIn>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -178,11 +178,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 5. Proje Ortakları */}
+      {/* 5. Project Partners */}
       <section className="overflow-hidden border-b border-border">
         <FadeIn className="container-app py-16">
           <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
-            Proje Ortakları
+            Project Partners
           </h2>
         </FadeIn>
         <div className="relative mt-2 overflow-hidden pb-16 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
@@ -192,25 +192,25 @@ export default async function HomePage() {
                 key={i}
                 className="flex h-16 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-surface text-xs text-textSecondary"
               >
-                Ortak Logo
+                Partner Logo
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. İstatistik Şeridi */}
+      {/* 6. Stats Strip */}
       <section className="relative overflow-hidden border-b border-border bg-surface">
         <GridBackground className="opacity-50" />
         <FadeIn className="container-app relative grid grid-cols-2 divide-x divide-border py-16 sm:grid-cols-4">
-          <StatCounter value={stats.countries} label="Ülke" />
-          <StatCounter value={stats.teams} label="Takım" />
-          <StatCounter value={stats.events} label="Etkinlik" />
-          <StatCounter value={stats.participants} label="Katılımcı" />
+          <StatCounter value={stats.countries} label="Countries" />
+          <StatCounter value={stats.teams} label="Teams" />
+          <StatCounter value={stats.events} label="Events" />
+          <StatCounter value={stats.participants} label="Participants" />
         </FadeIn>
       </section>
 
-      {/* 7. Alt CTA */}
+      {/* 7. Bottom CTA */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -228,14 +228,14 @@ export default async function HomePage() {
         <FadeIn className="container-app relative flex flex-col items-center gap-6 py-20 text-center">
           <RocketIcon className="animate-pulse-glow size-10 text-primary" aria-hidden="true" />
           <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary sm:text-4xl">
-            Takımını Oluştur ve Katıl
+            Create Your Team and Join
           </h2>
           <p className="max-w-xl text-balance text-textSecondary">
-            YouthArenaEsports topluluğuna katıl, takımını başvur ve Avrupa
-            genelindeki genç oyuncularla bağlantı kur.
+            Join the YouthArenaEsports community, apply with your team, and
+            connect with young players from across Europe.
           </p>
-          <ButtonLink href="/takimlar" size="lg" className="shadow-glow">
-            Takımını Oluştur
+          <ButtonLink href="/teams" size="lg" className="shadow-glow">
+            Create Your Team
             <ArrowRightIcon className="size-4" />
           </ButtonLink>
         </FadeIn>

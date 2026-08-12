@@ -65,10 +65,10 @@ export default async function EventDetailPage({
               {event.title}
             </h1>
             <Link
-              href={`/takimlar/${event.team.id}`}
+              href={`/teams/${event.team.id}`}
               className="mt-1 inline-block text-sm font-medium text-primaryAlt hover:underline"
             >
-              Düzenleyen: {event.team.name}
+              Organized by: {event.team.name}
             </Link>
           </div>
 
@@ -76,7 +76,7 @@ export default async function EventDetailPage({
 
           <div>
             <h2 className="font-heading text-lg font-semibold text-textPrimary">
-              Medya Galerisi
+              Media Gallery
             </h2>
             <div className="mt-3 grid gap-4 sm:grid-cols-3">
               {galleryPlaceholders.map((_, i) => (

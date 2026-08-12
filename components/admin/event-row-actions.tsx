@@ -24,9 +24,9 @@ export function EventRowActions({
     startTransition(async () => {
       const result = await publishEvent(eventId);
       if (result.success) {
-        toast.success(`${eventTitle} yayınlandı.`);
+        toast.success(`${eventTitle} published.`);
       } else {
-        toast.error(result.error ?? "İşlem başarısız oldu.");
+        toast.error(result.error ?? "The action failed.");
       }
     });
   };
@@ -41,15 +41,15 @@ export function EventRowActions({
           className="bg-secondary text-background hover:bg-secondary/90"
         >
           <CheckIcon className="size-4" />
-          Onayla
+          Approve
         </Button>
       )}
       <ConfirmRemoveButton
         kind="event"
         id={eventId}
         itemLabel={eventTitle}
-        confirmDescription="Bu etkinlik kalıcı olarak kaldırılacak."
-        successMessage={`${eventTitle} kaldırıldı.`}
+        confirmDescription="This event will be permanently removed."
+        successMessage={`${eventTitle} removed.`}
       />
     </div>
   );

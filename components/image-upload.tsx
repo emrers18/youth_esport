@@ -14,7 +14,7 @@ export function ImageUpload({
   onChange,
   folder,
   aspect = "square",
-  label = "Görsel",
+  label = "Image",
   className,
 }: {
   value?: string;
@@ -29,11 +29,11 @@ export function ImageUpload({
 
   const handleFile = async (file: File) => {
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      toast.error("Yalnızca JPG, JPEG veya PNG dosyaları yüklenebilir.");
+      toast.error("Only JPG, JPEG, or PNG files can be uploaded.");
       return;
     }
     if (file.size > MAX_SIZE_BYTES) {
-      toast.error("Dosya boyutu en fazla 5 MB olabilir.");
+      toast.error("File size must be at most 5 MB.");
       return;
     }
 
@@ -99,7 +99,7 @@ export function ImageUpload({
           <>
             <ImageIcon className="relative size-6 opacity-60" aria-hidden="true" />
             <span className="relative px-2 text-center text-xs font-medium">
-              {uploading ? "Yükleniyor..." : "Görsel Yükle"}
+              {uploading ? "Uploading..." : "Upload Image"}
             </span>
           </>
         )}
@@ -117,14 +117,14 @@ export function ImageUpload({
               e.stopPropagation();
               onChange(undefined);
             }}
-            aria-label="Görseli kaldır"
+            aria-label="Remove image"
             className="absolute right-1.5 top-1.5 z-10 flex size-6 items-center justify-center rounded-full bg-background/90 text-textPrimary opacity-0 transition-opacity hover:bg-danger group-hover:opacity-100"
           >
             <XIcon className="size-3.5" aria-hidden="true" />
           </button>
         )}
       </div>
-      <p className="mt-1 text-xs text-textSecondary">JPG, JPEG veya PNG · maksimum 5 MB.</p>
+      <p className="mt-1 text-xs text-textSecondary">JPG, JPEG, or PNG · maximum 5 MB.</p>
     </div>
   );
 }

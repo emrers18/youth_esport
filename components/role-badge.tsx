@@ -2,18 +2,18 @@ import { Crown, Target, Swords, Shield, Megaphone, ChartLine, UserRoundCog } fro
 import { cn } from "@/lib/utils";
 
 const roleIconMap: Record<string, typeof Crown> = {
-  Kaptan: Crown,
+  Captain: Crown,
   "IGL (In-Game Leader)": Target,
   "Duelist / Fragger": Swords,
   Support: Shield,
   Coach: Megaphone,
-  Analist: ChartLine,
-  "Yedek Oyuncu": UserRoundCog,
+  Analyst: ChartLine,
+  "Substitute Player": UserRoundCog,
 };
 
 export function RoleBadge({ role, className }: { role: string; className?: string }) {
   const Icon = roleIconMap[role] ?? UserRoundCog;
-  const isCaptain = role === "Kaptan";
+  const isCaptain = role === "Captain";
 
   return (
     <span

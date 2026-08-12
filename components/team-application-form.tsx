@@ -46,7 +46,7 @@ export function TeamApplicationForm() {
       description: "",
       captainEmail: "",
       logoUrl: "",
-      members: [{ fullName: "", email: "", role: "Kaptan" }],
+      members: [{ fullName: "", email: "", role: "Captain" }],
     },
   });
 
@@ -63,7 +63,7 @@ export function TeamApplicationForm() {
     if (result.success) {
       setSubmitted(true);
     } else {
-      toast.error(result.error ?? "Başvuru gönderilemedi.");
+      toast.error(result.error ?? "Failed to submit application.");
     }
   };
 
@@ -73,15 +73,15 @@ export function TeamApplicationForm() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklch,var(--color-secondary)_18%,transparent),transparent_60%)]" />
         <CheckCircle2Icon className="relative size-12 text-secondary animate-pulse-glow" aria-hidden="true" />
         <h2 className="relative font-heading text-2xl font-bold text-textPrimary">
-          Başvurunuz Alındı
+          Application Received
         </h2>
         <p className="relative max-w-md text-textSecondary">
-          Takım başvurunuz admin ekibimize iletildi. İnceleme sonuçlandığında
-          e-posta ile bilgilendirileceksiniz. Durumu Takım Panelinizden takip
-          edebilirsiniz.
+          Your team application has been sent to our admin team. You&apos;ll be
+          notified by email once it&apos;s reviewed. You can track the status from
+          your Team Panel.
         </p>
         <ButtonLink href="/panel" className="relative shadow-glow">
-          Panelime Git
+          Go to My Panel
         </ButtonLink>
       </div>
     );
@@ -92,9 +92,9 @@ export function TeamApplicationForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
         {(nameValue || tagValue) && (
           <div className="flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-4 py-2.5 text-sm">
-            <span className="text-textSecondary">Önizleme:</span>
+            <span className="text-textSecondary">Preview:</span>
             <span className="font-heading font-semibold tracking-wide text-primary">
-              {tagValue ? `[${tagValue.toUpperCase()}]` : ""} {nameValue || "Takım Adı"}
+              {tagValue ? `[${tagValue.toUpperCase()}]` : ""} {nameValue || "Team Name"}
             </span>
           </div>
         )}
@@ -105,7 +105,7 @@ export function TeamApplicationForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Takım Adı</FormLabel>
+                <FormLabel>Team Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Aurora Wolves" {...field} />
                 </FormControl>
@@ -118,7 +118,7 @@ export function TeamApplicationForm() {
             name="tag"
             render={({ field }) => (
               <FormItem className="sm:w-32">
-                <FormLabel>Takım Etiketi</FormLabel>
+                <FormLabel>Team Tag</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="AWL"
@@ -140,11 +140,11 @@ export function TeamApplicationForm() {
             name="mainGame"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ana Oyun</FormLabel>
+                <FormLabel>Main Game</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Oyun seçin" />
+                      <SelectValue placeholder="Select a game" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -164,9 +164,9 @@ export function TeamApplicationForm() {
             name="country"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ülke</FormLabel>
+                <FormLabel>Country</FormLabel>
                 <FormControl>
-                  <Input placeholder="Türkiye" {...field} />
+                  <Input placeholder="Turkey" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -179,10 +179,10 @@ export function TeamApplicationForm() {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Açıklama</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Takımınızı ve hedeflerinizi kısaca tanıtın."
+                  placeholder="Briefly introduce your team and your goals."
                   className="min-h-28"
                   {...field}
                 />
@@ -197,9 +197,9 @@ export function TeamApplicationForm() {
           name="captainEmail"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Kaptan E-postası</FormLabel>
+              <FormLabel>Captain Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="kaptan@ornek.com" {...field} />
+                <Input type="email" placeholder="captain@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -211,14 +211,14 @@ export function TeamApplicationForm() {
           name="logoUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Takım Logosu</FormLabel>
+              <FormLabel>Team Logo</FormLabel>
               <FormControl>
                 <ImageUpload
                   value={field.value}
                   onChange={field.onChange}
                   folder="team-logos"
                   aspect="square"
-                  label="Takım logosu"
+                  label="Team logo"
                 />
               </FormControl>
               <FormMessage />
@@ -228,15 +228,15 @@ export function TeamApplicationForm() {
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-textPrimary">Aktif Kişiler ve Rolleri</p>
+            <p className="text-sm font-medium text-textPrimary">Active Members and Roles</p>
             <Button
               type="button"
               variant="outline"
               size="sm"
-              onClick={() => append({ fullName: "", email: "", role: "Yedek Oyuncu" })}
+              onClick={() => append({ fullName: "", email: "", role: "Substitute Player" })}
             >
               <PlusIcon className="size-4" />
-              Üye Ekle
+              Add Member
             </Button>
           </div>
 
@@ -253,9 +253,9 @@ export function TeamApplicationForm() {
                 name={`members.${index}.fullName`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Ad Soyad</FormLabel>
+                    <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ad Soyad" {...field} />
+                      <Input placeholder="Full Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -266,9 +266,9 @@ export function TeamApplicationForm() {
                 name={`members.${index}.email`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>E-posta</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="uye@ornek.com" {...field} />
+                      <Input type="email" placeholder="member@example.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -279,11 +279,11 @@ export function TeamApplicationForm() {
                 name={`members.${index}.role`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Rol</FormLabel>
+                    <FormLabel>Role</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Rol seçin" />
+                          <SelectValue placeholder="Select a role" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -304,7 +304,7 @@ export function TeamApplicationForm() {
                 size="icon"
                 disabled={fields.length === 1}
                 onClick={() => remove(index)}
-                aria-label="Üyeyi kaldır"
+                aria-label="Remove member"
                 className="text-danger hover:bg-danger/10 hover:text-danger"
               >
                 <Trash2Icon className="size-4" />
@@ -314,7 +314,7 @@ export function TeamApplicationForm() {
         </div>
 
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting} className="self-start shadow-glow">
-          {form.formState.isSubmitting ? "Gönderiliyor..." : "Başvuruyu Gönder"}
+          {form.formState.isSubmitting ? "Submitting..." : "Submit Application"}
         </Button>
       </form>
     </Form>

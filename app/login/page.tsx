@@ -15,19 +15,19 @@ export default async function TeamLoginPage({
         <div className="mb-6 flex flex-col items-center gap-2 text-center">
           <GamepadIcon className="size-8 text-primary" aria-hidden="true" />
           <h1 className="font-heading text-2xl font-bold tracking-wide text-textPrimary">
-            Takım Girişi
+            Team Login
           </h1>
           <p className="text-sm text-textSecondary">
-            Takım panelinize erişmek için giriş yapın.
+            Sign in to access your team panel.
           </p>
         </div>
 
         <LoginForm variant="team" callbackUrl={callbackUrl} />
 
         <p className="mt-6 text-center text-sm text-textSecondary">
-          Hesabınız yok mu?{" "}
-          <Link href="/kayit" className="font-semibold text-primary hover:underline">
-            Kayıt Ol
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="font-semibold text-primary hover:underline">
+            Sign Up
           </Link>
         </p>
       </div>

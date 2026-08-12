@@ -8,17 +8,17 @@ const statusConfig: Record<
   { label: string; className: string; Icon: typeof ClockIcon }
 > = {
   PENDING: {
-    label: "Beklemede",
+    label: "Pending",
     className: "bg-warning/15 text-warning border-warning/30",
     Icon: ClockIcon,
   },
   APPROVED: {
-    label: "Onaylandı",
+    label: "Approved",
     className: "bg-secondary/15 text-secondary border-secondary/30",
     Icon: CheckCircle2Icon,
   },
   REJECTED: {
-    label: "Reddedildi",
+    label: "Rejected",
     className: "bg-danger/15 text-danger border-danger/30",
     Icon: XCircleIcon,
   },

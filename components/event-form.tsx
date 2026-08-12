@@ -37,10 +37,10 @@ export function EventForm() {
   const onSubmit = async (values: EventInput) => {
     const result = await createEvent(values);
     if (result.success) {
-      toast.success("Etkinlik oluşturuldu.");
-      router.push("/etkinlikler");
+      toast.success("Event created.");
+      router.push("/events");
     } else {
-      toast.error(result.error ?? "Etkinlik oluşturulamadı.");
+      toast.error(result.error ?? "Failed to create event.");
     }
   };
 
@@ -52,9 +52,9 @@ export function EventForm() {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Başlık</FormLabel>
+              <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Bridges Açılış Turnuvası" {...field} />
+                <Input placeholder="Bridges Opening Tournament" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -67,7 +67,7 @@ export function EventForm() {
             name="date"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Tarih ve Saat</FormLabel>
+                <FormLabel>Date and Time</FormLabel>
                 <FormControl>
                   <Input type="datetime-local" {...field} />
                 </FormControl>
@@ -80,9 +80,9 @@ export function EventForm() {
             name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Konum</FormLabel>
+                <FormLabel>Location</FormLabel>
                 <FormControl>
-                  <Input placeholder="İstanbul, Türkiye" {...field} />
+                  <Input placeholder="Istanbul, Turkey" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -95,9 +95,9 @@ export function EventForm() {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Açıklama</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea className="min-h-32" placeholder="Etkinliği tanıtın." {...field} />
+                <Textarea className="min-h-32" placeholder="Introduce the event." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -109,7 +109,7 @@ export function EventForm() {
           name="capacity"
           render={({ field }) => (
             <FormItem className="max-w-xs">
-              <FormLabel>Kontenjan</FormLabel>
+              <FormLabel>Capacity</FormLabel>
               <FormControl>
                 <Input type="number" min={1} {...field} />
               </FormControl>
@@ -123,14 +123,14 @@ export function EventForm() {
           name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Etkinlik Görseli</FormLabel>
+              <FormLabel>Event Image</FormLabel>
               <FormControl>
                 <ImageUpload
                   value={field.value}
                   onChange={field.onChange}
                   folder="event-images"
                   aspect="video"
-                  label="Etkinlik görseli"
+                  label="Event image"
                 />
               </FormControl>
               <FormMessage />
@@ -139,7 +139,7 @@ export function EventForm() {
         />
 
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting} className="self-start">
-          {form.formState.isSubmitting ? "Oluşturuluyor..." : "Etkinliği Oluştur"}
+          {form.formState.isSubmitting ? "Creating..." : "Create Event"}
         </Button>
       </form>
     </Form>

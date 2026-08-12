@@ -32,11 +32,11 @@ export function TeamSearch({ defaultValue }: { defaultValue?: string }) {
       />
       <Input
         type="search"
-        placeholder="Takım adı, etiket, oyun veya ülke ara..."
+        placeholder="Search by team name, tag, game, or country..."
         defaultValue={defaultValue}
         onChange={(e) => handleChange(e.target.value)}
         className="pl-9"
-        aria-label="Takım ara"
+        aria-label="Search teams"
       />
     </div>
   );

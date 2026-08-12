@@ -22,7 +22,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "YouthArenaEsports | Bridges: Anti Discriminatory Language and Esports",
   description:
-    "Bridges: Anti Discriminatory Language and Esports adlı Erasmus+ projesinin resmi web sitesi ve katılımcı yönetim aracı.",
+    "The official website and participant management tool of the Bridges: Anti Discriminatory Language and Esports Erasmus+ project.",
 };
 
 export default async function RootLayout({
@@ -39,7 +39,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="tr"
+      lang="en"
       className={`${rajdhani.variable} ${inter.variable} h-full dark`}
     >
       <body className="min-h-full flex flex-col bg-background text-textPrimary font-body antialiased">

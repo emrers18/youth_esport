@@ -9,10 +9,10 @@ export default async function NewTeamPage() {
   const user = await getAuthUser();
 
   if (!user) {
-    redirect("/giris?callbackUrl=/takimlar/yeni");
+    redirect("/login?callbackUrl=/teams/new");
   }
   if (user.role !== "TEAM") {
-    redirect("/takimlar");
+    redirect("/teams");
   }
 
   const supabase = await createClient();
@@ -29,8 +29,8 @@ export default async function NewTeamPage() {
   return (
     <div>
       <PageHeader
-        title="Takımını Oluştur"
-        description="Aşağıdaki formu doldurarak Bridges projesine katılmak için başvurunu gönder. Başvurun admin onayından sonra Takımlar sayfasında görünür olacak."
+        title="Create Your Team"
+        description="Fill out the form below to submit your application to join the Bridges project. Your application will appear on the Teams page once approved by an admin."
       />
       <div className="container-app max-w-3xl pb-20">
         <TeamApplicationForm />

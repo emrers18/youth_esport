@@ -28,12 +28,12 @@ import { updateTeamProfile } from "@/lib/actions/team-actions";
 import { MAIN_GAME_OPTIONS } from "@/lib/validation/team";
 
 const profileSchema = z.object({
-  name: z.string().min(2, "Takım adı en az 2 karakter olmalı."),
-  tag: z.string().min(2, "Takım etiketi en az 2 karakter olmalı.").max(6),
-  mainGame: z.string().min(2, "Ana oyun belirtin."),
-  country: z.string().min(2, "Ülke belirtin."),
-  description: z.string().min(20, "Açıklama en az 20 karakter olmalı.").max(1000),
-  captainEmail: z.string().email("Geçerli bir e-posta girin."),
+  name: z.string().min(2, "Team name must be at least 2 characters."),
+  tag: z.string().min(2, "Team tag must be at least 2 characters.").max(6),
+  mainGame: z.string().min(2, "Specify a main game."),
+  country: z.string().min(2, "Specify a country."),
+  description: z.string().min(20, "Description must be at least 20 characters.").max(1000),
+  captainEmail: z.string().email("Enter a valid email address."),
   logoUrl: z.string().optional(),
 });
 
@@ -54,10 +54,10 @@ export function TeamProfileForm({
   const onSubmit = async (values: ProfileInput) => {
     const result = await updateTeamProfile(values);
     if (result.success) {
-      toast.success("Profil güncellendi.");
+      toast.success("Profile updated.");
       router.refresh();
     } else {
-      toast.error(result.error ?? "Güncelleme başarısız oldu.");
+      toast.error(result.error ?? "Update failed.");
     }
   };
 
@@ -70,7 +70,7 @@ export function TeamProfileForm({
             name="name"
             render={({ field }) => (
               <FormItem className="sm:col-span-2">
-                <FormLabel>Takım Adı</FormLabel>
+                <FormLabel>Team Name</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -83,7 +83,7 @@ export function TeamProfileForm({
             name="tag"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Takım Etiketi</FormLabel>
+                <FormLabel>Team Tag</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -104,11 +104,11 @@ export function TeamProfileForm({
             name="mainGame"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ana Oyun</FormLabel>
+                <FormLabel>Main Game</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Oyun seçin" />
+                      <SelectValue placeholder="Select a game" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -128,7 +128,7 @@ export function TeamProfileForm({
             name="country"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ülke</FormLabel>
+                <FormLabel>Country</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -143,7 +143,7 @@ export function TeamProfileForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Açıklama</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea className="min-h-28" {...field} />
               </FormControl>
@@ -157,7 +157,7 @@ export function TeamProfileForm({
           name="captainEmail"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Kaptan E-postası</FormLabel>
+              <FormLabel>Captain Email</FormLabel>
               <FormControl>
                 <Input type="email" {...field} />
               </FormControl>
@@ -171,14 +171,14 @@ export function TeamProfileForm({
           name="logoUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Takım Logosu</FormLabel>
+              <FormLabel>Team Logo</FormLabel>
               <FormControl>
                 <ImageUpload
                   value={field.value}
                   onChange={field.onChange}
                   folder="team-logos"
                   aspect="square"
-                  label="Takım logosu"
+                  label="Team logo"
                 />
               </FormControl>
               <FormMessage />
@@ -187,7 +187,7 @@ export function TeamProfileForm({
         />
 
         <Button type="submit" disabled={form.formState.isSubmitting} className="self-start">
-          {form.formState.isSubmitting ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
+          {form.formState.isSubmitting ? "Saving..." : "Save Changes"}
         </Button>
       </form>
     </Form>

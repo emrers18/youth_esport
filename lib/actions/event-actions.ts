@@ -8,7 +8,7 @@ import type { ActionResult } from "@/lib/actions/team-actions";
 export async function createEvent(input: EventInput): Promise<ActionResult> {
   const user = await getAuthUser();
   if (!user || user.role !== "TEAM") {
-    return { success: false, error: "Etkinlik oluşturmak için giriş yapmalısınız." };
+    return { success: false, error: "You must be signed in to create an event." };
   }
 
   const supabase = await createClient();
@@ -20,12 +20,12 @@ export async function createEvent(input: EventInput): Promise<ActionResult> {
     .maybeSingle();
 
   if (!team || team.status !== "APPROVED") {
-    return { success: false, error: "Yalnızca onaylı takımlar etkinlik oluşturabilir." };
+    return { success: false, error: "Only approved teams can create events." };
   }
 
   const parsed = eventSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Geçersiz form verisi." };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid form data." };
   }
 
   const { title, description, date, location, imageUrl, capacity } = parsed.data;
@@ -41,10 +41,10 @@ export async function createEvent(input: EventInput): Promise<ActionResult> {
   });
 
   if (error) {
-    return { success: false, error: "Etkinlik oluşturulurken bir hata oluştu." };
+    return { success: false, error: "An error occurred while creating the event." };
   }
 
-  revalidatePath("/etkinlikler");
+  revalidatePath("/events");
   revalidatePath("/panel");
 
   return { success: true };
@@ -53,7 +53,7 @@ export async function createEvent(input: EventInput): Promise<ActionResult> {
 export async function removeEvent(eventId: string): Promise<ActionResult> {
   const user = await getAuthUser();
   if (user?.role !== "ADMIN") {
-    return { success: false, error: "Yetkiniz yok." };
+    return { success: false, error: "You do not have permission to do this." };
   }
 
   const supabase = await createClient();
@@ -61,10 +61,10 @@ export async function removeEvent(eventId: string): Promise<ActionResult> {
   const { error } = await supabase.from("events").delete().eq("id", eventId);
 
   if (error) {
-    return { success: false, error: "Etkinlik silinirken bir hata oluştu." };
+    return { success: false, error: "An error occurred while deleting the event." };
   }
 
-  revalidatePath("/etkinlikler");
+  revalidatePath("/events");
   revalidatePath("/admin");
 
   return { success: true };
@@ -73,7 +73,7 @@ export async function removeEvent(eventId: string): Promise<ActionResult> {
 export async function publishEvent(eventId: string): Promise<ActionResult> {
   const user = await getAuthUser();
   if (user?.role !== "ADMIN") {
-    return { success: false, error: "Yetkiniz yok." };
+    return { success: false, error: "You do not have permission to do this." };
   }
 
   const supabase = await createClient();
@@ -84,10 +84,10 @@ export async function publishEvent(eventId: string): Promise<ActionResult> {
     .eq("id", eventId);
 
   if (error) {
-    return { success: false, error: "Etkinlik yayınlanırken bir hata oluştu." };
+    return { success: false, error: "An error occurred while publishing the event." };
   }
 
-  revalidatePath("/etkinlikler");
+  revalidatePath("/events");
   revalidatePath("/admin");
 
   return { success: true };
@@ -96,7 +96,7 @@ export async function publishEvent(eventId: string): Promise<ActionResult> {
 export async function toggleEventParticipation(eventId: string): Promise<ActionResult> {
   const user = await getAuthUser();
   if (!user || user.role !== "TEAM") {
-    return { success: false, error: "Katılmak için giriş yapmalısınız." };
+    return { success: false, error: "You must be signed in to participate." };
   }
 
   const supabase = await createClient();
@@ -108,7 +108,7 @@ export async function toggleEventParticipation(eventId: string): Promise<ActionR
     .maybeSingle();
 
   if (!team || team.status !== "APPROVED") {
-    return { success: false, error: "Yalnızca onaylı takımlar etkinliklere katılabilir." };
+    return { success: false, error: "Only approved teams can participate in events." };
   }
 
   // Check existing participation
@@ -127,7 +127,7 @@ export async function toggleEventParticipation(eventId: string): Promise<ActionR
       .insert({ event_id: eventId, team_id: team.id });
   }
 
-  revalidatePath(`/etkinlikler/${eventId}`);
+  revalidatePath(`/events/${eventId}`);
 
   return { success: true };
 }

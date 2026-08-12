@@ -39,17 +39,17 @@ export default async function EventsPage({
   return (
     <div>
       <PageHeader
-        title="Etkinlikler"
-        description="Bridges projesi kapsamında düzenlenen turnuvalar, atölyeler ve buluşmalar."
+        title="Events"
+        description="Tournaments, workshops, and meetups organized as part of the Bridges project."
       />
 
       <div className="container-app pb-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <EventFilterTabs active={activeFilter} />
           {canCreate ? (
-            <ButtonLink href="/etkinlikler/yeni" className="shadow-glow">
+            <ButtonLink href="/events/new" className="shadow-glow">
               <PlusIcon className="size-4" />
-              Etkinlik Oluştur
+              Create Event
             </ButtonLink>
           ) : (
             <Button
@@ -57,12 +57,12 @@ export default async function EventsPage({
               className="shadow-glow"
               title={
                 user
-                  ? "Yalnızca onaylı takımlar etkinlik oluşturabilir."
-                  : "Etkinlik oluşturmak için giriş yapmalısınız."
+                  ? "Only approved teams can create events."
+                  : "You must be signed in to create an event."
               }
             >
               <PlusIcon className="size-4" />
-              Etkinlik Oluştur
+              Create Event
             </Button>
           )}
         </div>
@@ -72,8 +72,8 @@ export default async function EventsPage({
             icon={PixelJoystick}
             title={
               activeFilter === "past"
-                ? "Henüz geçmiş etkinlik bulunmuyor."
-                : "Yaklaşan etkinlik bulunmuyor."
+                ? "There are no past events yet."
+                : "There are no upcoming events."
             }
           />
         ) : (

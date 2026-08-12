@@ -7,8 +7,8 @@ import { teamApplicationSchema } from "@/lib/validation/team";
 
 const registerTeamSchema = z
   .object({
-    email: z.string().email("Geçerli bir e-posta girin."),
-    password: z.string().min(8, "Şifre en az 8 karakter olmalı."),
+    email: z.string().email("Enter a valid email address."),
+    password: z.string().min(8, "Password must be at least 8 characters."),
   })
   .extend(teamApplicationSchema.shape);
 
@@ -27,7 +27,7 @@ export async function registerTeamWithAccount(
 ): Promise<RegisterTeamState> {
   const parsed = registerTeamSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message ?? "Geçersiz form verisi." };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid form data." };
   }
 
   const { email, password, name, tag, mainGame, country, description, captainEmail, logoUrl, members } =
@@ -44,7 +44,7 @@ export async function registerTeamWithAccount(
 
   if (createUserError) {
     const message = createUserError.message.toLowerCase().includes("already been registered")
-      ? "Bu e-posta adresi zaten kayıtlı."
+      ? "This email address is already registered."
       : createUserError.message;
     return { success: false, error: message };
   }
@@ -69,7 +69,7 @@ export async function registerTeamWithAccount(
   if (teamError) {
     return {
       success: false,
-      error: "Hesap oluşturuldu ancak takım başvurusu kaydedilemedi. Lütfen giriş yapıp panelinizden tekrar deneyin.",
+      error: "Your account was created but the team application could not be saved. Please sign in and try again from your panel.",
     };
   }
 

@@ -32,5 +32,5 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.redirect(new URL("/giris", request.url));
+  return NextResponse.redirect(new URL("/login", request.url));
 }

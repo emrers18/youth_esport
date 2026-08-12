@@ -25,9 +25,9 @@ export function PendingTeamActions({ teamId, teamName }: { teamId: string; teamN
     startTransition(async () => {
       const result = await approveTeam(teamId);
       if (result.success) {
-        toast.success(`${teamName} onaylandı.`);
+        toast.success(`${teamName} approved.`);
       } else {
-        toast.error(result.error ?? "İşlem başarısız oldu.");
+        toast.error(result.error ?? "The action failed.");
       }
     });
   };
@@ -36,10 +36,10 @@ export function PendingTeamActions({ teamId, teamName }: { teamId: string; teamN
     startTransition(async () => {
       const result = await rejectTeam(teamId, note || undefined);
       if (result.success) {
-        toast.success(`${teamName} reddedildi.`);
+        toast.success(`${teamName} rejected.`);
         setDialogOpen(false);
       } else {
-        toast.error(result.error ?? "İşlem başarısız oldu.");
+        toast.error(result.error ?? "The action failed.");
       }
     });
   };
@@ -48,7 +48,7 @@ export function PendingTeamActions({ teamId, teamName }: { teamId: string; teamN
     <div className="flex items-center gap-2">
       <Button size="sm" onClick={handleApprove} disabled={isPending} className="bg-secondary text-background hover:bg-secondary/90">
         <CheckIcon className="size-4" />
-        Onayla
+        Approve
       </Button>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -63,29 +63,29 @@ export function PendingTeamActions({ teamId, teamName }: { teamId: string; teamN
           }
         >
           <XIcon className="size-4" />
-          Reddet
+          Reject
         </DialogTrigger>
         <DialogContent className="border-border bg-surface">
           <DialogHeader>
             <DialogTitle className="font-heading text-textPrimary">
-              {teamName} başvurusunu reddet
+              Reject {teamName}&apos;s application
             </DialogTitle>
             <DialogDescription className="text-textSecondary">
-              İsteğe bağlı olarak takıma iletilecek bir ret notu ekleyebilirsiniz.
+              You can optionally add a rejection note that will be sent to the team.
             </DialogDescription>
           </DialogHeader>
           <Textarea
-            placeholder="Ret nedeni (opsiyonel)"
+            placeholder="Reason for rejection (optional)"
             value={note}
             onChange={(e) => setNote(e.target.value)}
             className="min-h-24"
           />
           <DialogFooter>
             <Button variant="outline" onClick={() => setDialogOpen(false)}>
-              Vazgeç
+              Cancel
             </Button>
             <Button onClick={handleReject} disabled={isPending} className="bg-danger text-textPrimary hover:bg-danger/90">
-              {isPending ? "Gönderiliyor..." : "Reddet"}
+              {isPending ? "Submitting..." : "Reject"}
             </Button>
           </DialogFooter>
         </DialogContent>

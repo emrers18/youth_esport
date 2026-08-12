@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 export const eventSchema = z.object({
-  title: z.string().min(3, "Başlık en az 3 karakter olmalı."),
+  title: z.string().min(3, "Title must be at least 3 characters."),
   description: z
     .string()
-    .min(20, "Açıklama en az 20 karakter olmalı.")
-    .max(2000, "Açıklama en fazla 2000 karakter olabilir."),
-  date: z.string().min(1, "Tarih ve saat seçin."),
-  location: z.string().min(2, "Konum belirtin."),
+    .min(20, "Description must be at least 20 characters.")
+    .max(2000, "Description can be at most 2000 characters."),
+  date: z.string().min(1, "Select a date and time."),
+  location: z.string().min(2, "Specify a location."),
   imageUrl: z.string().optional(),
-  capacity: z.coerce.number().int().min(1, "Kontenjan en az 1 olmalı."),
+  capacity: z.coerce.number().int().min(1, "Capacity must be at least 1."),
 });
 
 export type EventInput = z.infer<typeof eventSchema>;

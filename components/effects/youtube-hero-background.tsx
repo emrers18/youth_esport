@@ -14,7 +14,7 @@ export function YoutubeHeroBackground({
     >
       <iframe
         src={src}
-        title="Arka plan tanıtım videosu"
+        title="Background promotional video"
         allow="autoplay; encrypted-media"
         tabIndex={-1}
         className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-[177.78vh] min-w-full -translate-x-1/2 -translate-y-1/2"

@@ -29,28 +29,28 @@ export default async function AdminPage() {
   return (
     <div>
       <PageHeader
-        title="Admin Paneli"
-        description="Takım başvurularını yönetin ve etkinlikleri denetleyin."
+        title="Admin Panel"
+        description="Manage team applications and review events."
       />
 
       <div className="container-app pb-20">
         <Tabs defaultValue="pending">
           <TabsList className="bg-surface">
             <TabsTrigger value="pending">
-              Bekleyen Takımlar
+              Pending Teams
               {pendingTeams.length > 0 && (
                 <span className="ml-1.5 rounded-full bg-warning/20 px-1.5 py-0.5 text-[10px] font-bold text-warning">
                   {pendingTeams.length}
                 </span>
               )}
             </TabsTrigger>
-            <TabsTrigger value="approved">Onaylı Takımlar</TabsTrigger>
-            <TabsTrigger value="events">Etkinlikler</TabsTrigger>
+            <TabsTrigger value="approved">Approved Teams</TabsTrigger>
+            <TabsTrigger value="events">Events</TabsTrigger>
           </TabsList>
 
           <TabsContent value="pending" className="mt-6">
             {pendingTeams.length === 0 ? (
-              <p className="text-textSecondary">Bekleyen başvuru bulunmuyor.</p>
+              <p className="text-textSecondary">There are no pending applications.</p>
             ) : (
               <div className="flex flex-col gap-4">
                 {pendingTeams.map((team) => (
@@ -70,7 +70,7 @@ export default async function AdminPage() {
                         {team.country}
                         <span className="mx-1">·</span>
                         <UsersIcon className="size-3.5" aria-hidden="true" />
-                        {team.members.length} üye
+                        {team.members.length} members
                       </p>
                       <p className="mt-2 max-w-2xl text-sm text-textSecondary">
                         {team.description}
@@ -85,7 +85,7 @@ export default async function AdminPage() {
 
           <TabsContent value="approved" className="mt-6">
             {approvedTeams.length === 0 ? (
-              <p className="text-textSecondary">Onaylı takım bulunmuyor.</p>
+              <p className="text-textSecondary">There are no approved teams.</p>
             ) : (
               <div className="flex flex-col gap-4">
                 {approvedTeams.map((team) => (
@@ -102,18 +102,18 @@ export default async function AdminPage() {
                         {team.country}
                         <span className="mx-1">·</span>
                         <UsersIcon className="size-3.5" aria-hidden="true" />
-                        {team._count.members} üye
+                        {team._count.members} members
                         <span className="mx-1">·</span>
                         <CalendarIcon className="size-3.5" aria-hidden="true" />
-                        {team._count.events} etkinlik
+                        {team._count.events} events
                       </p>
                     </div>
                     <ConfirmRemoveButton
                       kind="team"
                       id={team.id}
                       itemLabel={team.name}
-                      confirmDescription="Takım ve ilişkili tüm üyeler/etkinlikler kalıcı olarak silinecek."
-                      successMessage={`${team.name} kaldırıldı.`}
+                      confirmDescription="The team and all associated members/events will be permanently deleted."
+                      successMessage={`${team.name} removed.`}
                     />
                   </div>
                 ))}
@@ -123,7 +123,7 @@ export default async function AdminPage() {
 
           <TabsContent value="events" className="mt-6">
             {events.length === 0 ? (
-              <p className="text-textSecondary">Henüz etkinlik bulunmuyor.</p>
+              <p className="text-textSecondary">There are no events yet.</p>
             ) : (
               <div className="flex flex-col gap-4">
                 {events.map((event) => (

@@ -28,20 +28,20 @@ export default async function TeamDetailPage({
         <GridBackground className="opacity-40" />
         <div className="container-app relative flex flex-col gap-6 py-10">
           <Link
-            href="/takimlar"
+            href="/teams"
             className="inline-flex w-fit items-center gap-1.5 text-sm text-textSecondary transition-colors hover:text-primary"
           >
             <ArrowLeftIcon className="size-3.5" aria-hidden="true" />
-            Tüm Takımlar
+            All Teams
           </Link>
 
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
             <div className="hud-corners relative w-32 shrink-0 sm:w-40">
               <MediaPlaceholder
                 imageUrl={team.logo_url}
-                alt={`${team.name} logosu`}
+                alt={`${team.name} logo`}
                 aspect="square"
-                label="Logo Yakında"
+                label="Logo Coming Soon"
               />
             </div>
 
@@ -64,7 +64,7 @@ export default async function TeamDetailPage({
                 </span>
                 <span className="flex items-center gap-1.5">
                   <UsersIcon className="size-4" aria-hidden="true" />
-                  {team._count.members} üye
+                  {team._count.members} members
                 </span>
               </div>
             </div>
@@ -75,12 +75,12 @@ export default async function TeamDetailPage({
       <div className="container-app grid gap-10 py-12 lg:grid-cols-[1fr_320px]">
         <div className="flex flex-col gap-8">
           <div>
-            <h2 className="font-heading text-lg font-semibold text-textPrimary">Hakkında</h2>
+            <h2 className="font-heading text-lg font-semibold text-textPrimary">About</h2>
             <p className="mt-3 text-textSecondary">{team.description}</p>
           </div>
 
           <div>
-            <h2 className="font-heading text-lg font-semibold text-textPrimary">Kadro</h2>
+            <h2 className="font-heading text-lg font-semibold text-textPrimary">Roster</h2>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {team.members.map((member: { id: string; full_name: string; role: string }) => (
                 <li
@@ -98,13 +98,13 @@ export default async function TeamDetailPage({
         {team.events.length > 0 && (
           <aside className="flex h-fit flex-col gap-3 rounded-lg border border-border bg-surface p-5">
             <h2 className="font-heading text-lg font-semibold text-textPrimary">
-              Düzenlediği Etkinlikler
+              Events Organized
             </h2>
             <ul className="flex flex-col gap-2">
               {team.events.map((event: { id: string; title: string; date: string }) => (
                 <li key={event.id}>
                   <Link
-                    href={`/etkinlikler/${event.id}`}
+                    href={`/events/${event.id}`}
                     className="flex items-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-sm text-textPrimary transition-colors hover:border-primary/40"
                   >
                     <CalendarIcon className="size-4 shrink-0 text-primary" aria-hidden="true" />

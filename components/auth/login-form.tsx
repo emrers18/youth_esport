@@ -18,8 +18,8 @@ import {
 import { createClient } from "@/lib/supabase";
 
 const loginSchema = z.object({
-  email: z.string().email("Geçerli bir e-posta girin."),
-  password: z.string().min(1, "Şifre gerekli."),
+  email: z.string().email("Enter a valid email address."),
+  password: z.string().min(1, "Password is required."),
 });
 
 type LoginInput = z.infer<typeof loginSchema>;
@@ -49,7 +49,7 @@ export function LoginForm({
     });
 
     if (error) {
-      setFormError("E-posta veya şifre hatalı.");
+      setFormError("Incorrect email or password.");
       return;
     }
 
@@ -59,7 +59,7 @@ export function LoginForm({
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        setFormError("Giriş başarısız.");
+        setFormError("Login failed.");
         return;
       }
 
@@ -71,7 +71,7 @@ export function LoginForm({
 
       if (profile?.role !== "ADMIN") {
         await supabase.auth.signOut();
-        setFormError("Bu hesap admin yetkisine sahip değil.");
+        setFormError("This account does not have admin access.");
         return;
       }
 
@@ -92,9 +92,9 @@ export function LoginForm({
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-posta</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" autoComplete="email" placeholder="ornek@eposta.com" {...field} />
+                <Input type="email" autoComplete="email" placeholder="you@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -105,7 +105,7 @@ export function LoginForm({
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Şifre</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type="password" autoComplete="current-password" placeholder="••••••••" {...field} />
               </FormControl>
@@ -121,7 +121,7 @@ export function LoginForm({
         )}
 
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? "Giriş yapılıyor..." : "Giriş Yap"}
+          {form.formState.isSubmitting ? "Signing in..." : "Sign In"}
         </Button>
       </form>
     </Form>

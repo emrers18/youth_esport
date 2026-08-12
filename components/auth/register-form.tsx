@@ -35,8 +35,8 @@ import { registerTeamWithAccount } from "@/lib/actions/auth-actions";
 
 const registerFormSchema = z
   .object({
-    email: z.string().email("Geçerli bir e-posta girin."),
-    password: z.string().min(8, "Şifre en az 8 karakter olmalı."),
+    email: z.string().email("Enter a valid email address."),
+    password: z.string().min(8, "Password must be at least 8 characters."),
   })
   .extend(teamApplicationSchema.shape);
 
@@ -57,7 +57,7 @@ export function RegisterForm() {
       description: "",
       captainEmail: "",
       logoUrl: "",
-      members: [{ fullName: "", email: "", role: "Kaptan" }],
+      members: [{ fullName: "", email: "", role: "Captain" }],
     },
   });
 
@@ -70,8 +70,8 @@ export function RegisterForm() {
     const result = await registerTeamWithAccount(values);
 
     if (!result.success) {
-      const message = result.error ?? "Kayıt başarısız oldu.";
-      if (message.includes("e-posta")) {
+      const message = result.error ?? "Registration failed.";
+      if (message.includes("email")) {
         form.setError("email", { message });
       }
       toast.error(message);
@@ -90,12 +90,12 @@ export function RegisterForm() {
     });
 
     if (signInError) {
-      toast.success("Hesabınız ve takım başvurunuz oluşturuldu. Lütfen giriş yapın.");
-      router.push("/giris");
+      toast.success("Your account and team application have been created. Please sign in.");
+      router.push("/login");
       return;
     }
 
-    toast.success("Hesabınız oluşturuldu ve takım başvurunuz gönderildi.");
+    toast.success("Your account was created and your team application was submitted.");
     router.push("/panel");
     router.refresh();
   };
@@ -105,16 +105,16 @@ export function RegisterForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
         <div className="flex flex-col gap-5">
           <h2 className="font-heading text-sm font-semibold uppercase tracking-wide text-textSecondary">
-            Hesap Bilgileri
+            Account Details
           </h2>
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>E-posta</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" autoComplete="email" placeholder="ornek@eposta.com" {...field} />
+                  <Input type="email" autoComplete="email" placeholder="you@example.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -125,9 +125,9 @@ export function RegisterForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Şifre</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" autoComplete="new-password" placeholder="En az 8 karakter" {...field} />
+                  <Input type="password" autoComplete="new-password" placeholder="At least 8 characters" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -137,7 +137,7 @@ export function RegisterForm() {
 
         <div className="flex flex-col gap-5 border-t border-border pt-6">
           <h2 className="font-heading text-sm font-semibold uppercase tracking-wide text-textSecondary">
-            Takım Bilgileri
+            Team Details
           </h2>
 
           <div className="grid gap-5 sm:grid-cols-[1fr_auto]">
@@ -146,7 +146,7 @@ export function RegisterForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Takım Adı</FormLabel>
+                  <FormLabel>Team Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Aurora Wolves" {...field} />
                   </FormControl>
@@ -159,7 +159,7 @@ export function RegisterForm() {
               name="tag"
               render={({ field }) => (
                 <FormItem className="sm:w-32">
-                  <FormLabel>Takım Etiketi</FormLabel>
+                  <FormLabel>Team Tag</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="AWL"
@@ -181,11 +181,11 @@ export function RegisterForm() {
               name="mainGame"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ana Oyun</FormLabel>
+                  <FormLabel>Main Game</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Oyun seçin" />
+                        <SelectValue placeholder="Select a game" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -205,9 +205,9 @@ export function RegisterForm() {
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ülke</FormLabel>
+                  <FormLabel>Country</FormLabel>
                   <FormControl>
-                    <Input placeholder="Türkiye" {...field} />
+                    <Input placeholder="Turkey" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -220,10 +220,10 @@ export function RegisterForm() {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Açıklama</FormLabel>
+                <FormLabel>Description</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Takımınızı ve hedeflerinizi kısaca tanıtın."
+                    placeholder="Briefly introduce your team and your goals."
                     className="min-h-24"
                     {...field}
                   />
@@ -238,9 +238,9 @@ export function RegisterForm() {
             name="captainEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Kaptan E-postası</FormLabel>
+                <FormLabel>Captain Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="kaptan@ornek.com" {...field} />
+                  <Input type="email" placeholder="captain@example.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -252,14 +252,14 @@ export function RegisterForm() {
             name="logoUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Takım Logosu</FormLabel>
+                <FormLabel>Team Logo</FormLabel>
                 <FormControl>
                   <ImageUpload
                     value={field.value}
                     onChange={field.onChange}
                     folder="team-logos"
                     aspect="square"
-                    label="Takım logosu"
+                    label="Team logo"
                   />
                 </FormControl>
                 <FormMessage />
@@ -269,15 +269,15 @@ export function RegisterForm() {
 
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-textPrimary">Aktif Kişiler ve Rolleri</p>
+              <p className="text-sm font-medium text-textPrimary">Active Members and Roles</p>
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => append({ fullName: "", email: "", role: "Yedek Oyuncu" })}
+                onClick={() => append({ fullName: "", email: "", role: "Substitute Player" })}
               >
                 <PlusIcon className="size-4" />
-                Üye Ekle
+                Add Member
               </Button>
             </div>
 
@@ -294,9 +294,9 @@ export function RegisterForm() {
                   name={`members.${index}.fullName`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Ad Soyad</FormLabel>
+                      <FormLabel>Full Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ad Soyad" {...field} />
+                        <Input placeholder="Full Name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -307,9 +307,9 @@ export function RegisterForm() {
                   name={`members.${index}.email`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>E-posta</FormLabel>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="uye@ornek.com" {...field} />
+                        <Input type="email" placeholder="member@example.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -320,11 +320,11 @@ export function RegisterForm() {
                   name={`members.${index}.role`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Rol</FormLabel>
+                      <FormLabel>Role</FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Rol seçin" />
+                            <SelectValue placeholder="Select a role" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -345,7 +345,7 @@ export function RegisterForm() {
                   size="icon"
                   disabled={fields.length === 1}
                   onClick={() => remove(index)}
-                  aria-label="Üyeyi kaldır"
+                  aria-label="Remove member"
                   className="text-danger hover:bg-danger/10 hover:text-danger"
                 >
                   <Trash2Icon className="size-4" />
@@ -356,7 +356,7 @@ export function RegisterForm() {
         </div>
 
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? "Hesap oluşturuluyor..." : "Kayıt Ol ve Başvur"}
+          {form.formState.isSubmitting ? "Creating account..." : "Sign Up and Apply"}
         </Button>
       </form>
     </Form>

@@ -15,13 +15,13 @@ export default async function ProjectOutputsPage() {
   return (
     <div>
       <PageHeader
-        title="Proje Çıktıları"
-        description="Bridges projesi kapsamında üretilen rehberler, raporlar ve eğitim materyalleri."
+        title="Project Outputs"
+        description="Guides, reports, and training materials produced as part of the Bridges project."
       />
 
       <div className="container-app pb-16">
         {outputs.length === 0 ? (
-          <EmptyState icon={PixelTrophy} title="Henüz yayınlanmış bir çıktı bulunmuyor." />
+          <EmptyState icon={PixelTrophy} title="There are no published outputs yet." />
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {outputs.map((output, i) => (
@@ -43,7 +43,7 @@ export default async function ProjectOutputsPage() {
                         href={output.file_url ?? "#"}
                         className="text-sm font-semibold text-primary hover:underline"
                       >
-                        İndir →
+                        Download →
                       </a>
                     </div>
                   </CardContent>
@@ -56,7 +56,7 @@ export default async function ProjectOutputsPage() {
         {outputs.length > 0 && (
           <FadeIn className="mt-16">
             <h2 className="font-heading text-2xl font-bold tracking-wide text-textPrimary">
-              Zaman Çizelgesi
+              Timeline
             </h2>
             <ol className="mt-6 flex flex-col gap-6 border-l border-border pl-6">
               {outputs.map((output, i) => (

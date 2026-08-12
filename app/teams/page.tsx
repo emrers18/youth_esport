@@ -21,15 +21,15 @@ export default async function TeamsPage({
 
   const createHref = user
     ? user.role === "TEAM"
-      ? "/takimlar/yeni"
+      ? "/teams/new"
       : "/panel"
-    : "/giris";
+    : "/login";
 
   return (
     <div>
       <PageHeader
-        title="Takımlar"
-        description="Bridges projesine katılan onaylı takımları keşfedin."
+        title="Teams"
+        description="Discover the approved teams taking part in the Bridges project."
       />
 
       <div className="container-app pb-16">
@@ -37,15 +37,15 @@ export default async function TeamsPage({
           <TeamSearch defaultValue={q} />
           <ButtonLink href={createHref} className="shadow-glow">
             <PlusIcon className="size-4" />
-            Takımını Oluştur
+            Create Your Team
           </ButtonLink>
         </div>
 
         {teams.length === 0 ? (
           <EmptyState
             icon={PixelShield}
-            title={q ? `"${q}" için sonuç bulunamadı.` : "Henüz onaylı takım bulunmuyor."}
-            description={!q ? "İlk takımı sen oluştur ve listenin başında yer al." : undefined}
+            title={q ? `No results found for "${q}".` : "There are no approved teams yet."}
+            description={!q ? "Be the first to create a team and lead the list." : undefined}
           />
         ) : (
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

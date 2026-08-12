@@ -9,42 +9,42 @@ export const MAIN_GAME_OPTIONS = [
   "EA Sports FC",
   "Overwatch 2",
   "Dota 2",
-  "Diğer",
+  "Other",
 ] as const;
 
 export const MEMBER_ROLE_OPTIONS = [
-  "Kaptan",
+  "Captain",
   "IGL (In-Game Leader)",
   "Duelist / Fragger",
   "Support",
   "Coach",
-  "Analist",
-  "Yedek Oyuncu",
+  "Analyst",
+  "Substitute Player",
 ] as const;
 
 export const teamMemberSchema = z.object({
-  fullName: z.string().min(2, "Ad soyad en az 2 karakter olmalı."),
-  email: z.string().email("Geçerli bir e-posta girin."),
-  role: z.string().min(2, "Rol belirtin."),
+  fullName: z.string().min(2, "Full name must be at least 2 characters."),
+  email: z.string().email("Enter a valid email address."),
+  role: z.string().min(2, "Specify a role."),
 });
 
 export const teamApplicationSchema = z.object({
-  name: z.string().min(2, "Takım adı en az 2 karakter olmalı."),
+  name: z.string().min(2, "Team name must be at least 2 characters."),
   tag: z
     .string()
-    .min(2, "Takım etiketi en az 2 karakter olmalı.")
-    .max(6, "Takım etiketi en fazla 6 karakter olabilir."),
-  mainGame: z.string().min(2, "Ana oyun belirtin."),
-  country: z.string().min(2, "Ülke belirtin."),
+    .min(2, "Team tag must be at least 2 characters.")
+    .max(6, "Team tag can be at most 6 characters."),
+  mainGame: z.string().min(2, "Specify a main game."),
+  country: z.string().min(2, "Specify a country."),
   description: z
     .string()
-    .min(20, "Açıklama en az 20 karakter olmalı.")
-    .max(1000, "Açıklama en fazla 1000 karakter olabilir."),
-  captainEmail: z.string().email("Geçerli bir kaptan e-postası girin."),
+    .min(20, "Description must be at least 20 characters.")
+    .max(1000, "Description can be at most 1000 characters."),
+  captainEmail: z.string().email("Enter a valid captain email address."),
   logoUrl: z.string().optional(),
   members: z
     .array(teamMemberSchema)
-    .min(1, "En az bir üye eklemelisiniz."),
+    .min(1, "You must add at least one member."),
 });
 
 export type TeamApplicationInput = z.infer<typeof teamApplicationSchema>;

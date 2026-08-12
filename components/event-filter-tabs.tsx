@@ -5,8 +5,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { value: "upcoming", label: "Yaklaşan" },
-  { value: "past", label: "Geçmiş" },
+  { value: "upcoming", label: "Upcoming" },
+  { value: "past", label: "Past" },
 ];
 
 export function EventFilterTabs({ active }: { active: "upcoming" | "past" }) {

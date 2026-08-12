@@ -33,9 +33,9 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // --- Admin route protection ---
-  if (pathname.startsWith("/admin") && pathname !== "/admin/giris") {
+  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     if (!user) {
-      const url = new URL("/admin/giris", request.url);
+      const url = new URL("/admin/login", request.url);
       return NextResponse.redirect(url);
     }
     // Check admin role
@@ -46,7 +46,7 @@ export async function proxy(request: NextRequest) {
       .single();
 
     if (profile?.role !== "ADMIN") {
-      const url = new URL("/admin/giris", request.url);
+      const url = new URL("/admin/login", request.url);
       return NextResponse.redirect(url);
     }
   }
@@ -54,7 +54,7 @@ export async function proxy(request: NextRequest) {
   // --- Team panel protection ---
   if (pathname.startsWith("/panel")) {
     if (!user) {
-      const url = new URL("/giris", request.url);
+      const url = new URL("/login", request.url);
       url.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(url);
     }

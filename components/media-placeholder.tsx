@@ -55,7 +55,7 @@ export function MediaPlaceholder({
   return (
     <div
       role="img"
-      aria-label={alt || "Medya yakında"}
+      aria-label={alt || "Media coming soon"}
       className={cn(
         "flex flex-col items-center justify-center gap-2 rounded-md border border-border bg-surface text-textSecondary",
         aspectClass[aspect],
@@ -64,7 +64,7 @@ export function MediaPlaceholder({
     >
       <Icon className="size-8 opacity-60" strokeWidth={1.5} aria-hidden="true" />
       <span className="text-xs font-medium tracking-wide">
-        {label ?? (kind === "video" ? "Video Yakında" : "Görsel Yakında")}
+        {label ?? (kind === "video" ? "Video Coming Soon" : "Image Coming Soon")}
       </span>
     </div>
   );

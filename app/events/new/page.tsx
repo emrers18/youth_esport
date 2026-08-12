@@ -9,10 +9,10 @@ export default async function NewEventPage() {
   const user = await getAuthUser();
 
   if (!user) {
-    redirect("/giris?callbackUrl=/etkinlikler/yeni");
+    redirect("/login?callbackUrl=/events/new");
   }
   if (user.role !== "TEAM") {
-    redirect("/etkinlikler");
+    redirect("/events");
   }
 
   const supabase = await createClient();
@@ -29,8 +29,8 @@ export default async function NewEventPage() {
   return (
     <div>
       <PageHeader
-        title="Etkinlik Oluştur"
-        description={`${team.name} adına yeni bir etkinlik yayınla.`}
+        title="Create Event"
+        description={`Publish a new event on behalf of ${team.name}.`}
       />
       <div className="container-app max-w-3xl pb-20">
         <EventForm />

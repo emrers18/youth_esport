@@ -10,7 +10,7 @@ export type TeamCardData = {
 
 export function TeamCard({ team }: { team: TeamCardData }) {
   return (
-    <Link href={`/takimlar/${team.id}`} className="group block">
+    <Link href={`/teams/${team.id}`} className="group block">
       <Card className="hud-corners relative overflow-hidden border-border bg-surface transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-glow">
         <CardContent className="flex flex-col gap-3 p-5">
           <div>
@@ -23,7 +23,7 @@ export function TeamCard({ team }: { team: TeamCardData }) {
           </div>
 
           <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-            Detay Gör
+            View Details
             <ArrowRightIcon className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </span>
         </CardContent>

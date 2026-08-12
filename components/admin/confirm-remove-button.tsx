@@ -39,7 +39,7 @@ export function ConfirmRemoveButton({
         toast.success(successMessage);
         setOpen(false);
       } else {
-        toast.error(result.error ?? "İşlem başarısız oldu.");
+        toast.error(result.error ?? "The action failed.");
       }
     });
   };
@@ -52,24 +52,24 @@ export function ConfirmRemoveButton({
             size="sm"
             variant="outline"
             className="border-danger/40 text-danger hover:bg-danger/10"
-            aria-label={`${itemLabel} kaldır`}
+            aria-label={`Remove ${itemLabel}`}
           />
         }
       >
         <Trash2Icon className="size-4" />
-        Kaldır
+        Remove
       </DialogTrigger>
       <DialogContent className="border-border bg-surface">
         <DialogHeader>
-          <DialogTitle className="font-heading text-textPrimary">{itemLabel} kaldırılsın mı?</DialogTitle>
+          <DialogTitle className="font-heading text-textPrimary">Remove {itemLabel}?</DialogTitle>
           <DialogDescription className="text-textSecondary">{confirmDescription}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Vazgeç
+            Cancel
           </Button>
           <Button onClick={handleConfirm} disabled={isPending} className="bg-danger text-textPrimary hover:bg-danger/90">
-            {isPending ? "Kaldırılıyor..." : "Kaldır"}
+            {isPending ? "Removing..." : "Remove"}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -34,15 +34,15 @@ export async function sendTeamApplicationEmail(params: {
   const { teamName, country, captainEmail } = params;
   return send({
     to: emailConfig.adminNotificationEmail,
-    subject: `Yeni takım başvurusu: ${teamName}`,
+    subject: `New team application: ${teamName}`,
     html: `
-      <p>Yeni bir takım başvurusu alındı.</p>
+      <p>A new team application has been received.</p>
       <ul>
-        <li><strong>Takım:</strong> ${teamName}</li>
-        <li><strong>Ülke:</strong> ${country}</li>
-        <li><strong>Kaptan:</strong> ${captainEmail}</li>
+        <li><strong>Team:</strong> ${teamName}</li>
+        <li><strong>Country:</strong> ${country}</li>
+        <li><strong>Captain:</strong> ${captainEmail}</li>
       </ul>
-      <p>İncelemek için admin panelini ziyaret edin.</p>
+      <p>Visit the admin panel to review it.</p>
     `,
   });
 }
@@ -54,10 +54,10 @@ export async function sendApprovalEmail(params: {
   const { teamName, captainEmail } = params;
   return send({
     to: captainEmail,
-    subject: `${teamName} takımı onaylandı!`,
+    subject: `${teamName} has been approved!`,
     html: `
-      <p>Merhaba,</p>
-      <p><strong>${teamName}</strong> takımının YouthArenaEsports başvurusu onaylandı. Artık takımınız Takımlar sayfasında görüntülenecek ve etkinlik oluşturabileceksiniz.</p>
+      <p>Hello,</p>
+      <p><strong>${teamName}</strong>'s YouthArenaEsports application has been approved. Your team will now be shown on the Teams page and you can create events.</p>
     `,
   });
 }
@@ -70,12 +70,12 @@ export async function sendRejectionEmail(params: {
   const { teamName, captainEmail, rejectionNote } = params;
   return send({
     to: captainEmail,
-    subject: `${teamName} takımı başvurusu hakkında`,
+    subject: `About your ${teamName} application`,
     html: `
-      <p>Merhaba,</p>
-      <p><strong>${teamName}</strong> takımının YouthArenaEsports başvurusu bu aşamada reddedildi.</p>
-      ${rejectionNote ? `<p><strong>Not:</strong> ${rejectionNote}</p>` : ""}
-      <p>Sorularınız için bize ulaşabilirsiniz.</p>
+      <p>Hello,</p>
+      <p><strong>${teamName}</strong>'s YouthArenaEsports application was not approved at this stage.</p>
+      ${rejectionNote ? `<p><strong>Note:</strong> ${rejectionNote}</p>` : ""}
+      <p>Feel free to reach out to us with any questions.</p>
     `,
   });
 }
