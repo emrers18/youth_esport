@@ -6,13 +6,11 @@ import { StatCounter } from "@/components/stat-counter";
 import { TeamCard } from "@/components/team-card";
 import { GridBackground } from "@/components/effects/grid-background";
 import { FadeIn } from "@/components/effects/fade-in";
-import { YoutubeHeroBackground } from "@/components/effects/youtube-hero-background";
+import { VideoBackground } from "@/components/effects/video-background";
 import { PixelTrophy, PixelJoystick } from "@/components/effects/pixel-icons";
 import { getFeaturedTeams, getHomeStats } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
-
-const HERO_VIDEO_ID = "F7HFWuo_utY";
 
 const galleryItems = [
   { kind: "image" as const, label: "Tournament Moments", imageUrl: "/gallery/medya-1.jpg" },
@@ -36,8 +34,8 @@ export default async function HomePage() {
       {/* 1. Hero */}
       <section className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0 -z-10">
-          <YoutubeHeroBackground
-            videoId={HERO_VIDEO_ID}
+          <VideoBackground
+            src="/gallery/video_logo.mp4"
             className="absolute inset-0 h-full w-full overflow-hidden"
           />
           <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -52,23 +50,20 @@ export default async function HomePage() {
         <GridBackground />
 
         <div className="container-app relative flex min-h-130 flex-col items-start justify-end gap-6 py-14 text-left sm:min-h-155 sm:py-20">
-          <span className="animate-pulse-glow rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-xs font-semibold tracking-wide text-primary">
-            Bridges: Anti Discriminatory Language and Esports
-          </span>
-          <h1 className="text-glow-primary font-heading text-4xl font-bold tracking-wide text-textPrimary sm:text-6xl lg:text-7xl">
-            YouthEsports<span className="text-primary">Arena</span>
+          <h1 className="font-valorant text-4xl font-bold uppercase tracking-wide text-textPrimary sm:text-5xl lg:text-6xl">
+            YouthEsports<span className="text-gold text-glow-gold">Arena</span>
           </h1>
-          <p className="max-w-xl text-balance text-lg text-textSecondary">
+          <p className="max-w-xl text-balance font-valorant text-xl tracking-wide text-textSecondary">
             As an Erasmus+ funded youth project, we bring together young teams
             from across Europe to build a respectful and inclusive language
             culture in esports communities.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/teams" size="lg" className="shadow-glow">
+            <ButtonLink href="/teams" size="lg" className="shadow-glow font-valorant uppercase tracking-widest">
               Explore Teams
               <ArrowRightIcon className="size-4" />
             </ButtonLink>
-            <ButtonLink href="/events" size="lg" variant="outline">
+            <ButtonLink href="/events" size="lg" variant="outline" className="font-valorant uppercase tracking-widest">
               View Events
             </ButtonLink>
           </div>

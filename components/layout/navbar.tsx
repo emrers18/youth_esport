@@ -11,7 +11,6 @@ type Session = {
   };
 } | null;
 import {
-  GamepadIcon,
   MenuIcon,
   ShieldIcon,
   ChevronDownIcon,
@@ -23,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
+import { Logo } from "@/components/logo";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -73,9 +73,9 @@ export function Navbar({ session }: { session: Session | null }) {
           href="/"
           className="group flex items-center gap-2 font-heading text-lg font-bold tracking-wide text-textPrimary"
         >
-          <GamepadIcon
-            className="size-6 text-primary transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110"
-            aria-hidden="true"
+          <Logo
+            className="size-10 transition-transform duration-300 group-hover:scale-105"
+            priority
           />
           YouthEsports
           <span className="text-primary transition-[text-shadow] duration-300 group-hover:text-glow-primary">

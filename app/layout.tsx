@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Rajdhani, Inter } from "next/font/google";
+import { Rajdhani, Inter, Teko } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -17,6 +17,12 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+});
+
+const teko = Teko({
+  variable: "--font-teko",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -40,7 +46,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rajdhani.variable} ${inter.variable} h-full dark`}
+      className={`${rajdhani.variable} ${inter.variable} ${teko.variable} h-full dark`}
     >
       <body className="min-h-full flex flex-col bg-background text-textPrimary font-body antialiased">
         <CometTrail />

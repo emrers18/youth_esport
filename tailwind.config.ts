@@ -17,7 +17,7 @@ const config: Config = {
         background: "#F6F9FE",
         surface: "#FFFFFF",
         primary: {
-          DEFAULT: "#2563EB",
+          DEFAULT: "#0E7490",
           alt: "#DB2777",
         },
         primaryAlt: "#DB2777",
@@ -35,6 +35,7 @@ const config: Config = {
       fontFamily: {
         heading: ["var(--font-rajdhani)", "sans-serif"],
         body: ["var(--font-inter)", "sans-serif"],
+        valorant: ["var(--font-teko)", "sans-serif"],
       },
       spacing: {
         "1.5x": "8px",
@@ -50,7 +51,7 @@ const config: Config = {
         lg: "12px",
       },
       boxShadow: {
-        glow: "0 0 24px 0 rgba(37, 99, 235, 0.35)",
+        glow: "0 0 24px 0 rgba(14, 116, 144, 0.35)",
         "glow-secondary": "0 0 24px 0 rgba(4, 120, 87, 0.28)",
         "glow-gold": "0 0 24px 0 rgba(212, 175, 55, 0.4)",
       },
