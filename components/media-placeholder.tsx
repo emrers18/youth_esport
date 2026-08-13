@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ImageIcon, PlayCircleIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -44,8 +45,13 @@ export function MediaPlaceholder({
   if (imageUrl) {
     return (
       <div className={cn("relative overflow-hidden rounded-md bg-surface", aspectClass[aspect], className)}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageUrl} alt={alt} className="h-full w-full object-cover" />
+        <Image
+          src={imageUrl}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover"
+        />
       </div>
     );
   }

@@ -56,6 +56,7 @@ export default async function TeamsPage({
                     id: team.id,
                     name: team.name,
                     tag: team.tag,
+                    logoUrl: team.logo_url,
                   }}
                 />
               </FadeIn>

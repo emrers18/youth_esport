@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -10,13 +10,18 @@ export function TeamSearch({ defaultValue }: { defaultValue?: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Captured once: the debounced navigation below re-renders this component
+  // with a new `defaultValue` on every keystroke, but the field is
+  // uncontrolled, so it must only ever be initialized with the value it had
+  // on mount.
+  const [initialValue] = useState(defaultValue);
 
-  const handleChange = (value: string) => {
+  const handleChange = (next: string) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set("q", value);
+      if (next) {
+        params.set("q", next);
       } else {
         params.delete("q");
       }
@@ -33,7 +38,7 @@ export function TeamSearch({ defaultValue }: { defaultValue?: string }) {
       <Input
         type="search"
         placeholder="Search by team name, tag, game, or country..."
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
         onChange={(e) => handleChange(e.target.value)}
         className="pl-9"
         aria-label="Search teams"

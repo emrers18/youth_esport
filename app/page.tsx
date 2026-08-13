@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon, RocketIcon } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -136,6 +137,7 @@ export default async function HomePage() {
                     id: team.id,
                     name: team.name,
                     tag: team.tag,
+                    logoUrl: team.logo_url,
                   }}
                 />
               ))}
@@ -208,12 +210,13 @@ export default async function HomePage() {
       {/* 7. Bottom CTA */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/gallery/medya-5.jpg"
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-background/55" />
           <div className="absolute inset-0 bg-linear-to-t from-background via-background/30 to-transparent" />
