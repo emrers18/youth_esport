@@ -4,6 +4,7 @@ import { PlusIcon, UsersIcon, CalendarIcon, MapPinIcon } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { StatusBadge } from "@/components/status-badge";
 import { TeamProfileForm } from "@/components/team-profile-form";
+import { TeamMembersForm } from "@/components/team-members-form";
 import { ButtonLink } from "@/components/ui/button-link";
 import { EmptyState } from "@/components/empty-state";
 import { CapacityBar } from "@/components/capacity-bar";
@@ -28,6 +29,12 @@ type ParticipantTeam = {
   country: string;
 };
 
+type TeamMemberRow = {
+  full_name: string;
+  email: string;
+  role: string;
+};
+
 type ParticipatingEvent = {
   id: string;
   title: string;
@@ -48,7 +55,7 @@ export default async function TeamPanelPage() {
 
   const { data: team } = await supabase
     .from("teams")
-    .select("*, events(*), team_members(count)")
+    .select("*, events(*), team_members(*)")
     .eq("owner_user_id", user.id)
     .maybeSingle();
 
@@ -70,7 +77,8 @@ export default async function TeamPanelPage() {
     );
   }
 
-  const memberCount = team.team_members?.[0]?.count ?? 0;
+  const teamMembers = (team.team_members ?? []) as TeamMemberRow[];
+  const memberCount = teamMembers.length;
   const organizedEvents = ((team.events ?? []) as OrganizedEvent[]).slice().sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
@@ -161,6 +169,24 @@ export default async function TeamPanelPage() {
                 description: team.description,
                 captainEmail: team.captain_email,
                 logoUrl: team.logo_url ?? undefined,
+              }}
+            />
+          </div>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-bold text-textPrimary">Team Members</h2>
+          <div className="mt-4 max-w-3xl">
+            <TeamMembersForm
+              defaultValues={{
+                members:
+                  teamMembers.length > 0
+                    ? teamMembers.map((member) => ({
+                        fullName: member.full_name,
+                        email: member.email,
+                        role: member.role,
+                      }))
+                    : [{ fullName: "", email: "", role: "Captain" }],
               }}
             />
           </div>

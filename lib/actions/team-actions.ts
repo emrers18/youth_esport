@@ -1,10 +1,16 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 import { createClient } from "@/lib/supabase-server";
 import { getAuthUser } from "@/lib/supabase-server";
 import { sendApprovalEmail, sendRejectionEmail, sendTeamApplicationEmail } from "@/lib/email";
-import { teamApplicationSchema, type TeamApplicationInput } from "@/lib/validation/team";
+import {
+  teamApplicationSchema,
+  teamMemberSchema,
+  type TeamApplicationInput,
+  type TeamMemberInput,
+} from "@/lib/validation/team";
 
 export type ActionResult = { success: boolean; error?: string };
 
@@ -214,6 +220,62 @@ export async function updateTeamProfile(input: {
 
   revalidatePath("/panel");
   revalidatePath("/teams");
+
+  return { success: true };
+}
+
+export async function updateTeamMembers(members: TeamMemberInput[]): Promise<ActionResult> {
+  const user = await getAuthUser();
+  if (!user || user.role !== "TEAM") {
+    return { success: false, error: "You must be signed in." };
+  }
+
+  const parsed = z
+    .array(teamMemberSchema)
+    .min(1, "You must have at least one member.")
+    .safeParse(members);
+
+  if (!parsed.success) {
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid form data." };
+  }
+
+  const supabase = await createClient();
+
+  const { data: team } = await supabase
+    .from("teams")
+    .select("id")
+    .eq("owner_user_id", user.id)
+    .maybeSingle();
+
+  if (!team) {
+    return { success: false, error: "Team not found." };
+  }
+
+  const { error: deleteError } = await supabase
+    .from("team_members")
+    .delete()
+    .eq("team_id", team.id);
+
+  if (deleteError) {
+    return { success: false, error: "An error occurred while updating members." };
+  }
+
+  const { error: insertError } = await supabase.from("team_members").insert(
+    parsed.data.map((m) => ({
+      team_id: team.id,
+      full_name: m.fullName,
+      email: m.email,
+      role: m.role,
+    }))
+  );
+
+  if (insertError) {
+    return { success: false, error: "An error occurred while updating members." };
+  }
+
+  revalidatePath("/panel");
+  revalidatePath("/teams");
+  revalidatePath(`/teams/${team.id}`);
 
   return { success: true };
 }

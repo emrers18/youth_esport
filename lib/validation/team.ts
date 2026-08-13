@@ -48,3 +48,4 @@ export const teamApplicationSchema = z.object({
 });
 
 export type TeamApplicationInput = z.infer<typeof teamApplicationSchema>;
+export type TeamMemberInput = z.infer<typeof teamMemberSchema>;
