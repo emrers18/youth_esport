@@ -81,7 +81,11 @@ export async function createTeamApplication(
     }
   }
 
-  await sendTeamApplicationEmail({ teamName: name, country, captainEmail });
+  try {
+    await sendTeamApplicationEmail({ teamName: name, country, captainEmail });
+  } catch (emailError) {
+    console.error("Team application notification email failed:", emailError);
+  }
 
   revalidatePath("/teams");
   revalidatePath("/panel");
@@ -109,7 +113,11 @@ export async function approveTeam(teamId: string): Promise<ActionResult> {
     return { success: false, error: "An error occurred while approving the team." };
   }
 
-  await sendApprovalEmail({ teamName: team.name, captainEmail: team.captain_email });
+  try {
+    await sendApprovalEmail({ teamName: team.name, captainEmail: team.captain_email });
+  } catch (emailError) {
+    console.error("Approval notification email failed:", emailError);
+  }
 
   revalidatePath("/teams");
   revalidatePath("/panel");
@@ -141,11 +149,15 @@ export async function rejectTeam(
     return { success: false, error: "An error occurred while rejecting the team." };
   }
 
-  await sendRejectionEmail({
-    teamName: team.name,
-    captainEmail: team.captain_email,
-    rejectionNote,
-  });
+  try {
+    await sendRejectionEmail({
+      teamName: team.name,
+      captainEmail: team.captain_email,
+      rejectionNote,
+    });
+  } catch (emailError) {
+    console.error("Rejection notification email failed:", emailError);
+  }
 
   revalidatePath("/teams");
   revalidatePath("/panel");

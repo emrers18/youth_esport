@@ -91,7 +91,11 @@ export async function registerTeamWithAccount(
     }
   }
 
-  await sendTeamApplicationEmail({ teamName: name, country, captainEmail });
+  try {
+    await sendTeamApplicationEmail({ teamName: name, country, captainEmail });
+  } catch (emailError) {
+    console.error("Team application notification email failed:", emailError);
+  }
 
   // Sign in here (server-side, cookie-writing client) so the session is
   // already established by the time this action returns — the caller can
