@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Share2Icon, AtSignIcon, PlaySquareIcon, Link2Icon } from "lucide-react";
+import { partners } from "@/lib/partners";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -15,8 +16,6 @@ const socials = [
   { Icon: PlaySquareIcon, label: "YouTube" },
   { Icon: Link2Icon, label: "LinkedIn" },
 ];
-
-const partnerPlaceholders = Array.from({ length: 5 });
 
 export function Footer() {
   return (
@@ -61,12 +60,18 @@ export function Footer() {
             Project Partners
           </h3>
           <div className="mt-3 flex flex-wrap gap-2">
-            {partnerPlaceholders.map((_, i) => (
+            {partners.map((partner) => (
               <div
-                key={i}
-                className="flex h-10 w-20 items-center justify-center rounded-md border border-border bg-background text-[10px] text-textSecondary"
+                key={partner.name}
+                className="flex h-14 w-24 items-center justify-center rounded-md border border-border bg-background p-2"
               >
-                Logo
+                <Image
+                  src={partner.src}
+                  alt={`${partner.name} logo`}
+                  width={partner.width}
+                  height={partner.height}
+                  className="h-full w-full object-contain"
+                />
               </div>
             ))}
           </div>

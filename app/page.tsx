@@ -10,6 +10,7 @@ import { FadeIn } from "@/components/effects/fade-in";
 import { VideoBackground } from "@/components/effects/video-background";
 import { PixelTrophy, PixelJoystick } from "@/components/effects/pixel-icons";
 import { getFeaturedTeams, getHomeStats } from "@/lib/data";
+import { partners } from "@/lib/partners";
 
 export const dynamic = "force-dynamic";
 
@@ -21,8 +22,6 @@ const galleryItems = [
   { kind: "image" as const, label: "Team Interview", imageUrl: "/gallery/medya-5.jpg" },
   { kind: "image" as const, label: "Award Ceremony", imageUrl: "/gallery/medya-6.jpg" },
 ];
-
-const partnerPlaceholders = Array.from({ length: 6 });
 
 export default async function HomePage() {
   const [featuredTeams, stats] = await Promise.all([
@@ -184,12 +183,18 @@ export default async function HomePage() {
         </FadeIn>
         <div className="relative mt-2 overflow-hidden pb-16 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div className="flex w-max animate-marquee gap-4">
-            {[...partnerPlaceholders, ...partnerPlaceholders].map((_, i) => (
+            {[...partners, ...partners].map((partner, i) => (
               <div
-                key={i}
-                className="flex h-16 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-surface text-xs text-textSecondary"
+                key={`${partner.name}-${i}`}
+                className="flex h-16 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-3"
               >
-                Partner Logo
+                <Image
+                  src={partner.src}
+                  alt={`${partner.name} logo`}
+                  width={partner.width}
+                  height={partner.height}
+                  className="h-full w-full object-contain"
+                />
               </div>
             ))}
           </div>
