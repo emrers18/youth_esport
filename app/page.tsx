@@ -191,7 +191,7 @@ export default async function HomePage() {
             {marqueePartners.map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
-                className="flex h-16 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-3"
+                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-4"
               >
                 <Image
                   src={partner.src}

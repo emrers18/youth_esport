@@ -63,7 +63,7 @@ export function Footer() {
             {partners.map((partner) => (
               <div
                 key={partner.name}
-                className="flex h-14 w-24 items-center justify-center rounded-md border border-border bg-background p-2"
+                className="flex h-20 w-32 items-center justify-center rounded-md border border-border bg-background p-2"
               >
                 <Image
                   src={partner.src}
