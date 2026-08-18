@@ -23,6 +23,11 @@ const galleryItems = [
   { kind: "image" as const, label: "Award Ceremony", imageUrl: "/gallery/medya-6.jpg" },
 ];
 
+// Repeated enough times that a single half of the marquee track is always
+// wider than the viewport, so the looping animation never reveals a gap.
+const marqueeLoop = Array.from({ length: 10 }, () => partners).flat();
+const marqueePartners = [...marqueeLoop, ...marqueeLoop];
+
 export default async function HomePage() {
   const [featuredTeams, stats] = await Promise.all([
     getFeaturedTeams(4),
@@ -181,9 +186,9 @@ export default async function HomePage() {
             Project Partners
           </h2>
         </FadeIn>
-        <div className="relative mt-2 overflow-hidden pb-16 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max animate-marquee gap-4">
-            {[...partners, ...partners].map((partner, i) => (
+        <div className="group relative mt-2 overflow-hidden pb-16 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max animate-marquee gap-4 group-hover:paused">
+            {marqueePartners.map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
                 className="flex h-16 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-3"

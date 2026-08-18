@@ -176,7 +176,7 @@
 }
 
 .animate-marquee {
-  animation: marquee-x 22s linear infinite;
+  animation: marquee-x 110s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
