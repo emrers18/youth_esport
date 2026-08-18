@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { GamepadIcon, Share2Icon, AtSignIcon, PlaySquareIcon, Link2Icon } from "lucide-react";
+import { Share2Icon, AtSignIcon, PlaySquareIcon, Link2Icon } from "lucide-react";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -23,8 +24,13 @@ export function Footer() {
       <div className="container-app grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-3 sm:col-span-2 lg:col-span-1">
           <Link href="/" className="flex items-center gap-2 font-heading text-lg font-bold text-textPrimary">
-            <GamepadIcon className="size-6 text-primary" aria-hidden="true" />
-            YouthEsportsArena
+            <Image
+              src="/gallery/Erasmus+_Logo.svg"
+              alt="Erasmus+ logo"
+              width={312}
+              height={89}
+              className="h-9 w-auto"
+            />
           </Link>
           <p className="text-sm text-textSecondary">
             The official website and participant management tool of the
