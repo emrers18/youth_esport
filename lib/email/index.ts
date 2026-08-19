@@ -7,6 +7,19 @@ type SendArgs = {
   html: string;
 };
 
+// Team name, country, captain email, and rejection notes all come from
+// user-submitted form data and get interpolated into these HTML email
+// bodies — escape them so a value like `<img src=x onerror=...>` can't
+// inject markup into an admin's or captain's inbox.
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 async function send({ to, subject, html }: SendArgs) {
   if (!isEmailConfigured()) {
     console.log("--- [MOCK EMAIL] ---");
@@ -38,9 +51,9 @@ export async function sendTeamApplicationEmail(params: {
     html: `
       <p>A new team application has been received.</p>
       <ul>
-        <li><strong>Team:</strong> ${teamName}</li>
-        <li><strong>Country:</strong> ${country}</li>
-        <li><strong>Captain:</strong> ${captainEmail}</li>
+        <li><strong>Team:</strong> ${escapeHtml(teamName)}</li>
+        <li><strong>Country:</strong> ${escapeHtml(country)}</li>
+        <li><strong>Captain:</strong> ${escapeHtml(captainEmail)}</li>
       </ul>
       <p>Visit the admin panel to review it.</p>
     `,
@@ -57,7 +70,7 @@ export async function sendApprovalEmail(params: {
     subject: `${teamName} has been approved!`,
     html: `
       <p>Hello,</p>
-      <p><strong>${teamName}</strong>'s YouthEsportsArena application has been approved. Your team will now be shown on the Teams page and you can create events.</p>
+      <p><strong>${escapeHtml(teamName)}</strong>'s YouthEsportsArena application has been approved. Your team will now be shown on the Teams page and you can create events.</p>
     `,
   });
 }
@@ -73,8 +86,8 @@ export async function sendRejectionEmail(params: {
     subject: `About your ${teamName} application`,
     html: `
       <p>Hello,</p>
-      <p><strong>${teamName}</strong>'s YouthEsportsArena application was not approved at this stage.</p>
-      ${rejectionNote ? `<p><strong>Note:</strong> ${rejectionNote}</p>` : ""}
+      <p><strong>${escapeHtml(teamName)}</strong>'s YouthEsportsArena application was not approved at this stage.</p>
+      ${rejectionNote ? `<p><strong>Note:</strong> ${escapeHtml(rejectionNote)}</p>` : ""}
       <p>Feel free to reach out to us with any questions.</p>
     `,
   });
