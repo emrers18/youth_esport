@@ -83,19 +83,13 @@ export default async function HomePage() {
               About the Project
             </h2>
             <p className="text-textSecondary">
-              Bridges: Anti Discriminatory Language and Esports is an Erasmus+
-              cooperation project established to combat discriminatory
-              language and exclusionary behavior faced by young people in
-              esports environments. The project brings together youth
-              organizations and esports communities from different countries
-              to strengthen inclusive communication skills.
+              The Digital Youth: Building Bridges Between Youth and Esports (BRIDGE) is an Erasmus+ Youth Exchange project that explores the potential of e-sports as a new space for youth participation, social connection and community building. While traditional youth spaces such as youth centres provide valuable opportunities for young people to meet, interact and take part in activities, not every young person feels connected to these environments. Many instead build friendships, communities and a sense of belonging through gaming and e-sports. BRIDGE aims to meet young people where they already are by bringing the values and opportunities of youth work into the digital spaces they naturally engage with. At the same time, the project encourages participants to explore both the opportunities and challenges of e-sports, including teamwork and belonging as well as issues such as toxic behaviour, discrimination and exclusion.
             </p>
             <p className="text-textSecondary">
-              The YouthEsportsArena platform is the official participant
-              management tool for teams taking part in the project, letting
-              them gain visibility, organize events, and easily access the
-              project&apos;s outputs.
+              The project brings together 34 participants from Sweden, Türkiye, Denmark, Romania and Spain for an international Youth Exchange in Örkelljunga, Sweden. Through teamwork, discussions, simulations, role-play, creative activities and intercultural exchange, participants will explore how e-sports communities can become safer, more inclusive and welcoming spaces. Beyond participating in the exchange, young people are encouraged to take an active role: working together, developing ideas, taking initiative and gaining the confidence to create activities for other young people. A central result of this process will be the Inclusive Esports Activity Blueprint, developed together by the participants. After the exchange, each national group will put their ideas into practice by organising a Local Inclusive LAN Event in their own community, giving participants the opportunity to move from being members of gaming communities to becoming active organisers and young leaders.
             </p>
+            <p className="text-textSecondary">
+              BRIDGE is built on cooperation between five organisations that bring together different experiences in youth work, inclusion, e-sports, sports, digital engagement and community activities. The project is coordinated by INTEGRATION FOR ALLA (IFALL) from Sweden, together with FAAL DERNEGI from Türkiye, BeginGlobal from Denmark, Euro Education Federation from Romania and Asociación USIT from Spain.  By connecting young people across five countries and supporting them to create their own local activities, BRIDGE aims to build communities around e-sports that are not only enjoyable and social, but also inclusive, responsible and youth-led. Through the local LAN events, the shared project platform and continued cooperation between participants and partner organisations, the project seeks to create an impact that continues well beyond the international exchange.            </p>
           </div>
           <div className="hud-corners">
             <MediaPlaceholder
