@@ -17,12 +17,12 @@ import {
   LayoutDashboardIcon,
   LogOutIcon,
 } from "lucide-react";
+import Image from "next/image";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
-import { Logo } from "@/components/logo";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -69,15 +69,15 @@ export function Navbar({ session }: { session: Session | null }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur supports-backdrop-filter:bg-background/70">
       <div className="container-app flex h-16 items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="group flex items-center gap-2 font-heading text-lg font-bold tracking-wide text-textPrimary"
-        >
-          <Logo
-            className="size-10 transition-transform duration-300 group-hover:scale-105"
+        <Link href="/" className="group flex items-center">
+          <Image
+            src="/gallery/yea_logo.svg"
+            alt="Youth Esports Arena"
+            width={1200}
+            height={577}
             priority
+            className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
           />
-          YouthEsportsArena
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
