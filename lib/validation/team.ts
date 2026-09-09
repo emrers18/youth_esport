@@ -14,6 +14,7 @@ export const MAIN_GAME_OPTIONS = [
 
 export const MEMBER_ROLE_OPTIONS = [
   "Captain",
+  "Player",
   "IGL (In-Game Leader)",
   "Duelist / Fragger",
   "Support",

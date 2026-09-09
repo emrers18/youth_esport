@@ -1,8 +1,9 @@
-import { Crown, Target, Swords, Shield, Megaphone, ChartLine, UserRoundCog } from "lucide-react";
+import { Crown, Target, Swords, Shield, Megaphone, ChartLine, UserRoundCog, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const roleIconMap: Record<string, typeof Crown> = {
   Captain: Crown,
+  Player: User,
   "IGL (In-Game Leader)": Target,
   "Duelist / Fragger": Swords,
   Support: Shield,
