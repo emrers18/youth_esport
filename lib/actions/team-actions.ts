@@ -8,8 +8,10 @@ import { sendApprovalEmail, sendRejectionEmail, sendTeamApplicationEmail } from 
 import {
   teamApplicationSchema,
   teamMemberSchema,
+  teamProfileSchema,
   type TeamApplicationInput,
   type TeamMemberInput,
+  type TeamProfileInput,
 } from "@/lib/validation/team";
 
 export type ActionResult = { success: boolean; error?: string };
@@ -187,18 +189,15 @@ export async function removeTeam(teamId: string): Promise<ActionResult> {
   return { success: true };
 }
 
-export async function updateTeamProfile(input: {
-  name: string;
-  tag: string;
-  mainGame: string;
-  country: string;
-  description: string;
-  captainEmail: string;
-  logoUrl?: string;
-}): Promise<ActionResult> {
+export async function updateTeamProfile(input: TeamProfileInput): Promise<ActionResult> {
   const user = await getAuthUser();
   if (!user || user.role !== "TEAM") {
     return { success: false, error: "You must be signed in." };
+  }
+
+  const parsed = teamProfileSchema.safeParse(input);
+  if (!parsed.success) {
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid form data." };
   }
 
   const supabase = await createClient();
@@ -216,13 +215,14 @@ export async function updateTeamProfile(input: {
   const { error } = await supabase
     .from("teams")
     .update({
-      name: input.name,
-      tag: input.tag,
-      main_game: input.mainGame,
-      country: input.country,
-      description: input.description,
-      captain_email: input.captainEmail,
-      logo_url: input.logoUrl || null,
+      name: parsed.data.name,
+      tag: parsed.data.tag,
+      main_game: parsed.data.mainGame,
+      country: parsed.data.country,
+      description: parsed.data.description,
+      captain_email: parsed.data.captainEmail,
+      logo_url: parsed.data.logoUrl || null,
+      gallery_urls: parsed.data.galleryUrls ?? [],
     })
     .eq("id", team.id);
 
@@ -232,6 +232,7 @@ export async function updateTeamProfile(input: {
 
   revalidatePath("/panel");
   revalidatePath("/teams");
+  revalidatePath(`/teams/${team.id}`);
 
   return { success: true };
 }

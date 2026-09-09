@@ -19,7 +19,7 @@ export function GalleryUpload({
 }: {
   value?: string[];
   onChange: (urls: string[]) => void;
-  folder: "event-gallery";
+  folder: "event-gallery" | "team-gallery";
   max?: number;
   label?: string;
   className?: string;

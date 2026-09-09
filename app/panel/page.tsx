@@ -169,6 +169,7 @@ export default async function TeamPanelPage() {
                 description: team.description,
                 captainEmail: team.captain_email,
                 logoUrl: team.logo_url ?? undefined,
+                galleryUrls: team.gallery_urls ?? [],
               }}
             />
           </div>

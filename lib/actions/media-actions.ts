@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase-admin";
 
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_FOLDERS = ["team-logos", "event-images", "event-gallery", "team-gallery"];
 
 export type UploadMediaResult =
   | { success: true; url: string }
@@ -49,7 +50,7 @@ export async function uploadMedia(formData: FormData): Promise<UploadMediaResult
   if (!(file instanceof File)) {
     return { success: false, error: "Invalid file." };
   }
-  if (folder !== "team-logos" && folder !== "event-images" && folder !== "event-gallery") {
+  if (typeof folder !== "string" || !ALLOWED_FOLDERS.includes(folder)) {
     return { success: false, error: "Invalid folder." };
   }
   if (file.size > MAX_SIZE_BYTES) {

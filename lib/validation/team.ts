@@ -50,3 +50,27 @@ export const teamApplicationSchema = z.object({
 
 export type TeamApplicationInput = z.infer<typeof teamApplicationSchema>;
 export type TeamMemberInput = z.infer<typeof teamMemberSchema>;
+
+export const TEAM_GALLERY_MAX = 6;
+
+export const teamProfileSchema = z.object({
+  name: z.string().min(2, "Team name must be at least 2 characters."),
+  tag: z
+    .string()
+    .min(2, "Team tag must be at least 2 characters.")
+    .max(6, "Team tag can be at most 6 characters."),
+  mainGame: z.string().min(2, "Specify a main game."),
+  country: z.string().min(2, "Specify a country."),
+  description: z
+    .string()
+    .min(20, "Description must be at least 20 characters.")
+    .max(1000, "Description can be at most 1000 characters."),
+  captainEmail: z.string().email("Enter a valid email address."),
+  logoUrl: z.string().optional(),
+  galleryUrls: z
+    .array(z.string().url())
+    .max(TEAM_GALLERY_MAX, `You can add up to ${TEAM_GALLERY_MAX} photos.`)
+    .optional(),
+});
+
+export type TeamProfileInput = z.infer<typeof teamProfileSchema>;

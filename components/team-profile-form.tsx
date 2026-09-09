@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,34 +23,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ImageUpload } from "@/components/image-upload";
+import { GalleryUpload } from "@/components/gallery-upload";
 import { updateTeamProfile } from "@/lib/actions/team-actions";
-import { MAIN_GAME_OPTIONS } from "@/lib/validation/team";
-
-const profileSchema = z.object({
-  name: z.string().min(2, "Team name must be at least 2 characters."),
-  tag: z.string().min(2, "Team tag must be at least 2 characters.").max(6),
-  mainGame: z.string().min(2, "Specify a main game."),
-  country: z.string().min(2, "Specify a country."),
-  description: z.string().min(20, "Description must be at least 20 characters.").max(1000),
-  captainEmail: z.string().email("Enter a valid email address."),
-  logoUrl: z.string().optional(),
-});
-
-type ProfileInput = z.infer<typeof profileSchema>;
+import {
+  MAIN_GAME_OPTIONS,
+  TEAM_GALLERY_MAX,
+  teamProfileSchema,
+  type TeamProfileInput,
+} from "@/lib/validation/team";
 
 export function TeamProfileForm({
   defaultValues,
 }: {
-  defaultValues: ProfileInput;
+  defaultValues: TeamProfileInput;
 }) {
   const router = useRouter();
 
-  const form = useForm<ProfileInput>({
-    resolver: zodResolver(profileSchema),
+  const form = useForm<TeamProfileInput>({
+    resolver: zodResolver(teamProfileSchema),
     defaultValues,
   });
 
-  const onSubmit = async (values: ProfileInput) => {
+  const onSubmit = async (values: TeamProfileInput) => {
     const result = await updateTeamProfile(values);
     if (result.success) {
       toast.success("Profile updated.");
@@ -179,6 +172,26 @@ export function TeamProfileForm({
                   folder="team-logos"
                   aspect="square"
                   label="Team logo"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="galleryUrls"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Team Photos</FormLabel>
+              <FormControl>
+                <GalleryUpload
+                  value={field.value}
+                  onChange={field.onChange}
+                  folder="team-gallery"
+                  max={TEAM_GALLERY_MAX}
+                  label="Team photo"
                 />
               </FormControl>
               <FormMessage />

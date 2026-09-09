@@ -93,6 +93,22 @@ export default async function TeamDetailPage({
               ))}
             </ul>
           </div>
+
+          {team.gallery_urls && team.gallery_urls.length > 0 && (
+            <div>
+              <h2 className="font-heading text-lg font-semibold text-textPrimary">Photos</h2>
+              <div className="mt-3 grid gap-4 sm:grid-cols-3">
+                {team.gallery_urls.map((url: string, i: number) => (
+                  <MediaPlaceholder
+                    key={url}
+                    imageUrl={url}
+                    alt={`${team.name} photo ${i + 1}`}
+                    aspect="square"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {team.events.length > 0 && (
