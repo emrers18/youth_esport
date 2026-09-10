@@ -14,6 +14,15 @@ import { partners } from "@/lib/partners";
 
 export const dynamic = "force-dynamic";
 
+// Photos from the team identity workshop at the Youth Exchange, where each
+// national group designed and presented its own team name, crest and values.
+const workshopTeams = [
+  { name: "Anatolian Pars", imageUrl: "/gallery/team_one.jpeg" },
+  { name: "GOAT", imageUrl: "/gallery/team_two.jpeg" },
+  { name: "Iberian Legends", imageUrl: "/gallery/team_three.jpeg" },
+  { name: "Carpathian Vipers", imageUrl: "/gallery/team_four.jpeg" },
+];
+
 const galleryItems = [
   { kind: "image" as const, label: "Tournament Moments", imageUrl: "/gallery/medya-1.jpg" },
   { kind: "image" as const, label: "Opening Ceremony", imageUrl: "/gallery/medya-2.jpg" },
@@ -148,7 +157,38 @@ export default async function HomePage() {
         </FadeIn>
       </section>
 
-      {/* 4. Media Gallery */}
+      {/* 4. Team Identity Workshop */}
+      <section className="border-b border-border">
+        <FadeIn className="container-app pt-16">
+          <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
+            Team Identity Workshop
+          </h2>
+          <p className="mt-2 max-w-2xl text-textSecondary">
+            During the Youth Exchange, each national group built its own team
+            identity from scratch — a name, a crest and the values they want to
+            play by — and presented it to everyone else.
+          </p>
+        </FadeIn>
+        <div className="container-app mt-8 grid gap-6 pb-16 sm:grid-cols-2">
+          {workshopTeams.map((team, i) => (
+            <FadeIn key={team.name} delay={i * 80} className="group">
+              <div className="hud-corners">
+                <MediaPlaceholder
+                  imageUrl={team.imageUrl}
+                  alt={`${team.name} presenting their team identity poster`}
+                  aspect="photo"
+                  className="transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+              <p className="mt-3 font-heading text-sm font-bold uppercase tracking-widest text-gold-dark">
+                {team.name}
+              </p>
+            </FadeIn>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Media Gallery */}
       <section className="border-b border-border">
         <div className="container-app py-16">
           <FadeIn className="flex items-center gap-3">
@@ -173,7 +213,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 5. Project Partners */}
+      {/* 6. Project Partners */}
       <section className="overflow-hidden border-b border-border">
         <FadeIn className="container-app py-16">
           <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
@@ -200,7 +240,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 6. Stats Strip */}
+      {/* 7. Stats Strip */}
       <section className="relative overflow-hidden border-b border-border bg-surface">
         <GridBackground className="opacity-50" />
         <FadeIn className="container-app relative grid grid-cols-2 divide-x divide-border py-16 sm:grid-cols-4">
@@ -211,7 +251,7 @@ export default async function HomePage() {
         </FadeIn>
       </section>
 
-      {/* 7. Bottom CTA */}
+      {/* 8. Bottom CTA */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <Image

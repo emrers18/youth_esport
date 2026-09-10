@@ -8,7 +8,7 @@ type MediaPlaceholderProps = {
   videoUrl?: string | null;
   alt?: string;
   kind?: "image" | "video";
-  aspect?: "video" | "square" | "portrait" | "wide";
+  aspect?: "video" | "square" | "portrait" | "wide" | "photo";
   className?: string;
   label?: string;
 };
@@ -17,6 +17,7 @@ const aspectClass: Record<NonNullable<MediaPlaceholderProps["aspect"]>, string> 
   video: "aspect-video",
   square: "aspect-square",
   portrait: "aspect-[3/4]",
+  photo: "aspect-[4/3]",
   wide: "aspect-[21/9]",
 };
 
