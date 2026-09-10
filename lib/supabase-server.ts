@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
@@ -30,8 +31,14 @@ export async function createClient() {
 /**
  * Returns the current authenticated user + their role from user_profiles.
  * Returns null if unauthenticated.
+ *
+ * Wrapped in React.cache so its two round trips are shared across the whole
+ * request. The root layout needs the user for the navbar, and several pages
+ * (/teams, /events, /panel, /events/[id]) need it again for their own
+ * authorization checks — without this, each of those call sites re-queries
+ * Supabase on every single navigation.
  */
-export async function getAuthUser() {
+export const getAuthUser = cache(async () => {
   const supabase = await createClient();
   const {
     data: { user },
@@ -49,4 +56,4 @@ export async function getAuthUser() {
     email: user.email!,
     role: (profile?.role ?? "TEAM") as "TEAM" | "ADMIN",
   };
-}
+});

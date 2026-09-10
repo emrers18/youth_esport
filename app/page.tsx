@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon, RocketIcon } from "lucide-react";
@@ -11,6 +12,7 @@ import { VideoBackground } from "@/components/effects/video-background";
 import { PixelTrophy, PixelJoystick } from "@/components/effects/pixel-icons";
 import { getFeaturedTeams, getHomeStats } from "@/lib/data";
 import { partners } from "@/lib/partners";
+import { StatsStripSkeleton, TeamCardSkeleton } from "@/components/skeletons";
 
 export const dynamic = "force-dynamic";
 
@@ -37,12 +39,68 @@ const galleryItems = [
 const marqueeLoop = Array.from({ length: 10 }, () => partners).flat();
 const marqueePartners = [...marqueeLoop, ...marqueeLoop];
 
-export default async function HomePage() {
-  const [featuredTeams, stats] = await Promise.all([
-    getFeaturedTeams(4),
-    getHomeStats(),
-  ]);
+/**
+ * Everything on this page except the featured teams and the stats strip is
+ * static. Those two are the only Supabase reads, so they live in their own
+ * async components behind <Suspense> — the hero, the project text and the
+ * galleries stream to the browser straight away instead of waiting on the
+ * database.
+ */
+async function FeaturedTeamsGrid() {
+  const featuredTeams = await getFeaturedTeams(4);
 
+  if (featuredTeams.length === 0) {
+    return (
+      <p className="mt-8 text-textSecondary">
+        There are no approved teams yet. Create the first one!
+      </p>
+    );
+  }
+
+  return (
+    <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {featuredTeams.map((team) => (
+        <TeamCard
+          key={team.id}
+          team={{
+            id: team.id,
+            name: team.name,
+            tag: team.tag,
+            logoUrl: team.logo_url,
+            country: team.country,
+            mainGame: team.main_game,
+            memberCount: team._count.members,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function FeaturedTeamsGridSkeleton() {
+  return (
+    <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <TeamCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+}
+
+async function StatsStrip() {
+  const stats = await getHomeStats();
+
+  return (
+    <FadeIn className="container-app relative grid grid-cols-2 divide-x divide-border py-16 sm:grid-cols-4">
+      <StatCounter value={stats.countries} label="Countries" />
+      <StatCounter value={stats.teams} label="Teams" />
+      <StatCounter value={stats.events} label="Events" />
+      <StatCounter value={stats.participants} label="Participants" />
+    </FadeIn>
+  );
+}
+
+export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* 1. Hero */}
@@ -135,28 +193,9 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {featuredTeams.length > 0 ? (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {featuredTeams.map((team) => (
-                <TeamCard
-                  key={team.id}
-                  team={{
-                    id: team.id,
-                    name: team.name,
-                    tag: team.tag,
-                    logoUrl: team.logo_url,
-                    country: team.country,
-                    mainGame: team.main_game,
-                    memberCount: team._count.members,
-                  }}
-                />
-              ))}
-            </div>
-          ) : (
-            <p className="mt-8 text-textSecondary">
-              There are no approved teams yet. Create the first one!
-            </p>
-          )}
+          <Suspense fallback={<FeaturedTeamsGridSkeleton />}>
+            <FeaturedTeamsGrid />
+          </Suspense>
         </FadeIn>
       </section>
 
@@ -246,12 +285,9 @@ export default async function HomePage() {
       {/* 7. Stats Strip */}
       <section className="relative overflow-hidden border-b border-border bg-surface">
         <GridBackground className="opacity-50" />
-        <FadeIn className="container-app relative grid grid-cols-2 divide-x divide-border py-16 sm:grid-cols-4">
-          <StatCounter value={stats.countries} label="Countries" />
-          <StatCounter value={stats.teams} label="Teams" />
-          <StatCounter value={stats.events} label="Events" />
-          <StatCounter value={stats.participants} label="Participants" />
-        </FadeIn>
+        <Suspense fallback={<StatsStripSkeleton />}>
+          <StatsStrip />
+        </Suspense>
       </section>
 
       {/* 8. Bottom CTA */}
