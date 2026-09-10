@@ -57,6 +57,9 @@ export default async function TeamsPage({
                     name: team.name,
                     tag: team.tag,
                     logoUrl: team.logo_url,
+                    country: team.country,
+                    mainGame: team.main_game,
+                    memberCount: team._count.members,
                   }}
                 />
               </FadeIn>
