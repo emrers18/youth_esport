@@ -10,6 +10,7 @@ import { GridBackground } from "@/components/effects/grid-background";
 import { FadeIn } from "@/components/effects/fade-in";
 import { VideoBackground } from "@/components/effects/video-background";
 import { PixelTrophy, PixelJoystick } from "@/components/effects/pixel-icons";
+import { JoinSteps } from "@/components/join-steps";
 import { getFeaturedTeams, getHomeStats } from "@/lib/data";
 import { partners } from "@/lib/partners";
 import { StatsStripSkeleton, TeamCardSkeleton } from "@/components/skeletons";
@@ -170,6 +171,38 @@ export default function HomePage() {
         </FadeIn>
       </section>
 
+      {/* How to Join */}
+      <section className="border-b border-border bg-surface">
+        <FadeIn className="container-app py-16">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
+                Register Your Team
+              </h2>
+              <p className="mt-2 max-w-2xl text-textSecondary">
+                Joining takes three steps. Registration creates your account and
+                team application at the same time.
+              </p>
+            </div>
+          </div>
+
+          <JoinSteps className="mt-8" />
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <ButtonLink href="/register" size="lg" variant="gold">
+              Register Your Team
+              <ArrowRightIcon className="size-4" />
+            </ButtonLink>
+            <p className="text-sm text-textSecondary">
+              Already registered?{" "}
+              <Link href="/login" className="font-semibold text-primary hover:underline">
+                Team Login
+              </Link>
+            </p>
+          </div>
+        </FadeIn>
+      </section>
+
       {/* 3. Featured Teams */}
       <section className="border-b border-border">
         <FadeIn className="container-app py-16">
@@ -263,7 +296,7 @@ export default function HomePage() {
           </h2>
         </FadeIn>
         <div className="group relative mt-2 overflow-hidden pb-16 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max animate-marquee gap-4 group-hover:paused">
+          <div className="flex w-max animate-marquee gap-4 group-hover:paused group-focus-within:paused">
             {marqueePartners.map((partner, i) => {
               const logo = (
                 <Image
@@ -283,7 +316,10 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${partner.name} website`}
-                  className={`${className} transition-colors hover:border-primary`}
+                  // Only the first copy of each logo is reachable by keyboard / screen readers;
+                  // the rest exist purely to keep the marquee loop seamless.
+                  {...(i >= partners.length ? { tabIndex: -1, "aria-hidden": true } : {})}
+                  className={`${className} outline-none transition-colors hover:border-primary focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/50`}
                 >
                   {logo}
                 </a>

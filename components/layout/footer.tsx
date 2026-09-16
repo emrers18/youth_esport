@@ -108,7 +108,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${partner.name} website`}
-                  className={`${className} transition-colors hover:border-primary`}
+                  className={`${className} outline-none transition-colors hover:border-primary focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/50`}
                 >
                   {logo}
                 </a>
@@ -133,9 +133,9 @@ export function Footer() {
                 {...(href.startsWith("mailto:") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 aria-label={label}
                 title={href.replace(/^mailto:/, "")}
-                className="flex size-9 items-center justify-center rounded-md border border-border bg-background text-textSecondary transition-colors hover:text-primary"
+                className="flex size-11 items-center justify-center rounded-md border border-border bg-background text-textSecondary outline-none transition-colors hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <Icon className="size-4" aria-hidden="true" />
+                <Icon className="size-5" aria-hidden="true" />
               </a>
             ))}
           </div>

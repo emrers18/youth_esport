@@ -23,7 +23,7 @@ export default async function TeamsPage({
     ? user.role === "TEAM"
       ? "/teams/new"
       : "/panel"
-    : "/login";
+    : "/register";
 
   return (
     <div>
