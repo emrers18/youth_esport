@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Share2Icon, AtSignIcon, PlaySquareIcon, Link2Icon } from "lucide-react";
+import { GlobeIcon, MailIcon } from "lucide-react";
+import type { SVGProps } from "react";
 import { partners } from "@/lib/partners";
 
 const quickLinks = [
@@ -10,11 +11,39 @@ const quickLinks = [
   { href: "/events", label: "Events" },
 ];
 
-const socials = [
-  { Icon: Share2Icon, label: "Instagram" },
-  { Icon: AtSignIcon, label: "X (Twitter)" },
-  { Icon: PlaySquareIcon, label: "YouTube" },
-  { Icon: Link2Icon, label: "LinkedIn" },
+function InstagramIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
+function FacebookIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function YoutubeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+      <path d="m10 15 5-3-5-3z" />
+    </svg>
+  );
+}
+
+const contacts = [
+  { Icon: GlobeIcon, label: "Website", href: "https://ifall.se/" },
+  { Icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/_ifall/" },
+  { Icon: MailIcon, label: "Email", href: "mailto:info@ifall.se" },
+  { Icon: FacebookIcon, label: "Facebook", href: "https://www.facebook.com/ifallsverige" },
+  { Icon: YoutubeIcon, label: "YouTube", href: "https://www.youtube.com/@integrationforalla4345" },
 ];
 
 export function Footer() {
@@ -60,11 +89,8 @@ export function Footer() {
             Project Partners
           </h3>
           <div className="mt-3 flex flex-wrap gap-2">
-            {partners.map((partner) => (
-              <div
-                key={partner.name}
-                className="flex h-20 w-32 items-center justify-center rounded-md border border-border bg-background p-2"
-              >
+            {partners.map((partner) => {
+              const logo = (
                 <Image
                   src={partner.src}
                   alt={`${partner.name} logo`}
@@ -72,27 +98,53 @@ export function Footer() {
                   height={partner.height}
                   className="h-full w-full object-contain"
                 />
-              </div>
-            ))}
+              );
+              const className =
+                "flex h-20 w-32 items-center justify-center rounded-md border border-border bg-background p-2";
+              return partner.href ? (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${partner.name} website`}
+                  className={`${className} transition-colors hover:border-primary`}
+                >
+                  {logo}
+                </a>
+              ) : (
+                <div key={partner.name} className={className}>
+                  {logo}
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div>
           <h3 className="font-heading text-sm font-semibold tracking-wide text-textPrimary">
-            Follow Us
+            Contact
           </h3>
-          <div className="mt-3 flex gap-3">
-            {socials.map(({ Icon, label }) => (
-              <span
+          <div className="mt-3 flex flex-wrap gap-3">
+            {contacts.map(({ Icon, label, href }) => (
+              <a
                 key={label}
-                role="img"
+                href={href}
+                {...(href.startsWith("mailto:") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 aria-label={label}
+                title={href.replace(/^mailto:/, "")}
                 className="flex size-9 items-center justify-center rounded-md border border-border bg-background text-textSecondary transition-colors hover:text-primary"
               >
                 <Icon className="size-4" aria-hidden="true" />
-              </span>
+              </a>
             ))}
           </div>
+          <a
+            href="mailto:info@ifall.se"
+            className="mt-3 inline-block text-sm text-textSecondary transition-colors hover:text-primary"
+          >
+            info@ifall.se
+          </a>
         </div>
       </div>
 

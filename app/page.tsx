@@ -264,11 +264,8 @@ export default function HomePage() {
         </FadeIn>
         <div className="group relative mt-2 overflow-hidden pb-16 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div className="flex w-max animate-marquee gap-4 group-hover:paused">
-            {marqueePartners.map((partner, i) => (
-              <div
-                key={`${partner.name}-${i}`}
-                className="flex h-24 w-44 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-4"
-              >
+            {marqueePartners.map((partner, i) => {
+              const logo = (
                 <Image
                   src={partner.src}
                   alt={`${partner.name} logo`}
@@ -276,8 +273,26 @@ export default function HomePage() {
                   height={partner.height}
                   className="h-full w-full object-contain"
                 />
-              </div>
-            ))}
+              );
+              const className =
+                "flex h-24 w-44 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-4";
+              return partner.href ? (
+                <a
+                  key={`${partner.name}-${i}`}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${partner.name} website`}
+                  className={`${className} transition-colors hover:border-primary`}
+                >
+                  {logo}
+                </a>
+              ) : (
+                <div key={`${partner.name}-${i}`} className={className}>
+                  {logo}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
