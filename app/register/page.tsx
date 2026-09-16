@@ -4,15 +4,15 @@ import { RegisterForm } from "@/components/auth/register-form";
 
 export default function RegisterPage() {
   return (
-    <div className="container-app flex min-h-[70vh] items-center justify-center py-16">
-      <div className="w-full max-w-2xl rounded-lg border border-border bg-surface p-8">
-        <div className="mb-6 flex flex-col items-center gap-2 text-center">
+    <div className="container-app flex min-h-[70vh] items-center justify-center py-12 sm:py-16">
+      <div className="w-full max-w-3xl rounded-lg border border-border bg-surface p-6 sm:p-10">
+        <div className="mb-8 flex flex-col items-center gap-2 text-center">
           <GamepadIcon className="size-8 text-primary" aria-hidden="true" />
-          <h1 className="font-heading text-2xl font-bold tracking-wide text-textPrimary">
+          <h1 className="font-heading text-3xl font-bold tracking-wide text-textPrimary">
             Team Registration
           </h1>
-          <p className="text-sm text-textSecondary">
-            Create your account and submit your team application at the same time.
+          <p className="text-base text-textSecondary">
+            Four short steps — your account and team application are created together.
           </p>
         </div>
 
