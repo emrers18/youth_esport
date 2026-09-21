@@ -11,6 +11,7 @@ import { FadeIn } from "@/components/effects/fade-in";
 import { VideoBackground } from "@/components/effects/video-background";
 import { PixelTrophy, PixelJoystick } from "@/components/effects/pixel-icons";
 import { JoinSteps } from "@/components/join-steps";
+import { YouTubeVideo, PROJECT_VIDEO_ID } from "@/components/youtube-video";
 import { getFeaturedTeams, getHomeStats } from "@/lib/data";
 import { partners } from "@/lib/partners";
 import { StatsStripSkeleton, TeamCardSkeleton } from "@/components/skeletons";
@@ -160,13 +161,7 @@ export default function HomePage() {
               BRIDGE is built on cooperation between five organisations that bring together different experiences in youth work, inclusion, e-sports, sports, digital engagement and community activities. The project is coordinated by INTEGRATION FOR ALLA (IFALL) from Sweden, together with FAAL DERNEGI from Türkiye, BeginGlobal from Denmark, Euro Education Federation from Romania and Asociación USIT from Spain.  By connecting young people across five countries and supporting them to create their own local activities, BRIDGE aims to build communities around e-sports that are not only enjoyable and social, but also inclusive, responsible and youth-led. Through the local LAN events, the shared project platform and continued cooperation between participants and partner organisations, the project seeks to create an impact that continues well beyond the international exchange.            </p>
           </div>
           <div className="hud-corners">
-            <MediaPlaceholder
-              aspect="video"
-              kind="image"
-              imageUrl="/gallery/esport.jpg"
-              alt="Project Introduction Image"
-              label="Project Introduction Image"
-            />
+            <YouTubeVideo videoId={PROJECT_VIDEO_ID} title="BRIDGE Project Introduction" />
           </div>
         </FadeIn>
       </section>

@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/empty-state";
 import { PixelTrophy } from "@/components/effects/pixel-icons";
 import { FadeIn } from "@/components/effects/fade-in";
+import { YouTubeVideo, PROJECT_VIDEO_ID } from "@/components/youtube-video";
 import { getProjectOutputs } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
@@ -20,6 +21,15 @@ export default async function ProjectOutputsPage() {
       />
 
       <div className="container-app pb-16">
+        <FadeIn className="mb-12 mt-10 flex flex-col gap-4">
+          <h2 className="font-heading text-2xl font-bold tracking-wide text-textPrimary">
+            Project Video
+          </h2>
+          <div className="hud-corners max-w-4xl">
+            <YouTubeVideo videoId={PROJECT_VIDEO_ID} title="BRIDGE Project Introduction" />
+          </div>
+        </FadeIn>
+
         {outputs.length === 0 ? (
           <EmptyState icon={PixelTrophy} title="There are no published outputs yet." />
         ) : (
